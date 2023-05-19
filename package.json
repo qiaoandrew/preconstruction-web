@@ -9,17 +9,31 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@notionhq/client": "^2.2.5",
+    "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.2.1",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
+    "firebase": "^9.22.0",
+    "formik": "^2.2.9",
+    "mapbox-gl": "^2.14.1",
     "next": "13.4.2",
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-feather": "^2.0.10",
+    "react-loader-spinner": "^5.3.4",
+    "react-map-gl": "^7.0.23",
+    "react-redux": "^8.0.5",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8",
+    "prettier-plugin-tailwindcss": "^0.3.0"
   }
 }
