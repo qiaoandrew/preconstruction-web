@@ -1,3 +1,9 @@
+export type User = {
+  uid: string;
+  email: string;
+  name: string;
+};
+
 export type Listing = {
   id: string;
   title: string;

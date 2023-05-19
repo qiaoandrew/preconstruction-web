@@ -7,6 +7,7 @@ import { auth, rdb } from '@/lib/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { onValue, ref } from 'firebase/database';
 import { decode } from '@/util/helpers';
+import { User } from '@/types/types';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -26,8 +27,8 @@ function Redux({ children }: { children: React.ReactNode }) {
           setUser({
             uid: user.uid,
             email: user.email,
-            displayName: user.displayName,
-          })
+            name: user.displayName,
+          } as User)
         );
       } else {
         dispatch(setUser(null));
