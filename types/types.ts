@@ -1,4 +1,4 @@
-export interface Listing {
+export type Listing = {
   id: string;
   title: string;
   subtitle: string;
@@ -12,28 +12,29 @@ export interface Listing {
   longitude: number;
   latitude: number;
   description: string;
-  sqft: number;
+  sqftLow: number;
+  sqftHigh: number;
   bathrooms: number;
   bedrooms: number;
   parking: number;
-  tables: Table[];
-  lists: List[];
+  tables?: Table[];
+  lists?: List[];
   links?: Button[];
   documents?: Button[];
-}
+};
 
-interface Table {
+type Table = {
   title: string;
   listData?: string[];
   keyValueData?: Record<string, string>;
-}
+};
 
-interface List {
+type List = {
   title: string;
   data: string[];
-}
+};
 
-interface Button {
+type Button = {
   label: string;
   link: string;
-}
+};
