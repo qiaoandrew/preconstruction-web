@@ -153,3 +153,10 @@ export function parseListing(unParsedListing: any): Listing {
     ],
   };
 }
+
+export function changeGoogleDriveURL(url: string) {
+  return `https://drive.google.com/uc?export=view&id=${url.substring(
+    url.indexOf('/d/') + 3,
+    url.indexOf('/view')
+  )}`;
+}
