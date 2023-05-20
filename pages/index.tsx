@@ -7,6 +7,7 @@ import Header from '@/components/navigation/Header';
 import Hero from '@/components/sections/home/Hero';
 import Explore from '@/components/sections/home/Explore';
 import ListingsCarousel from '@/components/carousels/ListingsCarousel';
+import SellYourProperty from '@/components/sections/home/SellYourProperty';
 import { getPreConstructionListings } from '@/util/firebase/preConstructionListings';
 
 type HomeProps = {
@@ -46,6 +47,7 @@ export default function Home({
         route='/for-rent'
         listings={rentListings}
       />
+      <SellYourProperty />
     </>
   );
 }

@@ -111,13 +111,13 @@ export default function ListingCard({
       <div
         className={`relative h-full overflow-hidden border border-blueGrey2 bg-grey1 ${borderRounding}`}
       >
-        {/* <div
+        <div
           className={`absolute inset-0 grid place-content-center bg-blue1 bg-opacity-80 px-3 backdrop-blur-md ${
             user ? 'hidden' : ''
           } ${borderRounding}`}
         >
           <p className={accountRequiredStyles}>Log in or sign up to view!</p>
-        </div> */}
+        </div>
 
         <img
           src={image}
