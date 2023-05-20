@@ -9,6 +9,7 @@ import Explore from '@/components/sections/home/Explore';
 import ListingsCarousel from '@/components/carousels/ListingsCarousel';
 import SellYourProperty from '@/components/sections/home/SellYourProperty';
 import BlogCarousel from '@/components/carousels/BlogCarousel';
+import Footer from '@/components/navigation/Footer';
 import { getPreConstructionListings } from '@/util/firebase/preConstructionListings';
 
 type HomeProps = {
@@ -50,6 +51,7 @@ export default function Home({
       />
       <SellYourProperty />
       <BlogCarousel blogs={blogs} />
+      <Footer />
     </>
   );
 }
