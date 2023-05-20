@@ -45,7 +45,7 @@ export const changeDisplayName = async (displayName: string) => {
   });
 };
 
-export const changeEmailAddress = async (email: string, password: string) => {
+export const changeEmail = async (email: string, password: string) => {
   if (!auth.currentUser) throw new Error('auth/no-current-user');
   const credentials = EmailAuthProvider.credential(
     auth.currentUser.email || '',

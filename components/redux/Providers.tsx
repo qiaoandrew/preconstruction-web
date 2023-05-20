@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { Provider, useDispatch } from 'react-redux';
-import { store } from '@/store/store';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import { RootState, store } from '@/store/store';
 import { setUser } from '@/store/slices/authSlice';
 import { setPreConstructionListings } from '@/store/slices/preConstructionListingsSlice';
 import { auth, rdb } from '@/lib/firebase';
@@ -19,6 +19,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
 function Redux({ children }: { children: React.ReactNode }) {
   const dispatch = useDispatch();
+  const loading = useSelector((state: RootState) => state.auth.loading);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -46,5 +47,5 @@ function Redux({ children }: { children: React.ReactNode }) {
     return () => unsubscribe();
   }, [dispatch]);
 
-  return <>{children}</>;
+  return <>{loading ? null : children}</>;
 }
