@@ -114,14 +114,13 @@ export function parseListing(unParsedListing: any): Listing {
     latitude: unParsedListing.map.latitude,
     description: unParsedListing.details.description,
     sqftLow: unParsedListing.details.sqft.includes('+')
-      ? unParsedListing.details.sqft.splice(
+      ? unParsedListing.details.sqft.substring(
           0,
           unParsedListing.details.sqft.indexOf('+')
         )
       : unParsedListing.details.sqft.split('-')[0],
     sqftHigh: unParsedListing.details.sqft.includes('+')
-      ? unParsedListing.details.sqft.splice(
-          0,
+      ? unParsedListing.details.sqft.substring(
           unParsedListing.details.sqft.indexOf('+')
         )
       : unParsedListing.details.sqft.split('-')[1],

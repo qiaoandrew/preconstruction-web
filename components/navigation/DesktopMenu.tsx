@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { ChevronDown } from 'react-feather';
 import { NESTED_ROUTES } from '@/constants/routes';
+import { Route } from '@/types/types';
 import { COLORS } from '@/constants/colors';
 
 export default function DesktopMenu() {
@@ -12,7 +13,7 @@ export default function DesktopMenu() {
           return <MenuDropdown route={route} key={route.text} />;
         } else {
           return (
-            <Link href={route.link} key={route.text}>
+            <Link href={route.link || ''} key={route.text}>
               <p className='text-base font-display font-medium text-blue1'>
                 {route.text}
               </p>
@@ -24,7 +25,7 @@ export default function DesktopMenu() {
   );
 }
 
-function MenuDropdown({ route }) {
+function MenuDropdown({ route }: { route: Route }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
@@ -52,17 +53,18 @@ function MenuDropdown({ route }) {
             : 'pointer-events-none opacity-0'
         }`}
       >
-        {route.dropdown.map((route) => (
-          <Link
-            href={route.link}
-            key={route.text}
-            onClick={() => setDropdownOpen(false)}
-          >
-            <p className='text-base font-display font-medium text-blue1'>
-              {route.text}
-            </p>
-          </Link>
-        ))}
+        {route.dropdown &&
+          route.dropdown.map((route) => (
+            <Link
+              href={route.link}
+              key={route.text}
+              onClick={() => setDropdownOpen(false)}
+            >
+              <p className='text-base font-display font-medium text-blue1'>
+                {route.text}
+              </p>
+            </Link>
+          ))}
       </div>
     </div>
   );

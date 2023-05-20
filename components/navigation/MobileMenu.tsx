@@ -8,14 +8,8 @@ import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import Button from '../UI/Button';
 import { NESTED_ROUTES } from '@/constants/routes';
+import { Route } from '@/types/types';
 import { ChevronDown } from 'react-feather';
-
-type Route = {
-  type: string;
-  text: string;
-  link?: string;
-  dropdown?: { text: string; link: string }[];
-};
 
 export default function MobileMenu() {
   const [openDropdown, setOpenDropdown] = useState('');

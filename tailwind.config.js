@@ -7,18 +7,6 @@ module.exports = {
   ],
   safelist: ['sm:hidden', 'lg:hidden', 'lg:block'],
   theme: {
-    borderRadius: {
-      '2xs': '4px',
-      'xs': '8px',
-      'sm': '12px',
-      'md': '16px',
-      'lg': '20px',
-      'xl': '24px',
-      '2xl': '28px',
-      '3xl': '32px',
-      '4xl': '36px',
-      'full': '9999px',
-    },
     colors: {
       blue1: '#12142D',
       blue2: '#242E67',
@@ -64,6 +52,18 @@ module.exports = {
       '5xl': '1800px',
     },
     extend: {
+      borderRadius: {
+        '2xs': '4px',
+        'xs': '8px',
+        'sm': '12px',
+        'md': '16px',
+        'lg': '20px',
+        'xl': '24px',
+        '2xl': '28px',
+        '3xl': '32px',
+        '4xl': '36px',
+        'full': '9999px',
+      },
       width: {
         0.25: '1px',
         2.5: '10px',

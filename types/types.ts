@@ -4,6 +4,13 @@ export type User = {
   name: string;
 };
 
+export type Route = {
+  type: string;
+  text: string;
+  link?: string;
+  dropdown?: { text: string; link: string }[];
+};
+
 export type Listing = {
   id: string;
   title: string;

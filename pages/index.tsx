@@ -4,6 +4,7 @@ import { getBlogPreviews } from '@/lib/notion';
 import { Listing } from '@/types/types';
 import SEO from '@/components/SEO/SEO';
 import Header from '@/components/navigation/Header';
+import Hero from '@/components/sections/home/Hero';
 
 type HomeProps = {
   blogs: any[];
@@ -19,6 +20,7 @@ export default function Home({ blogs, saleListings, rentListings }: HomeProps) {
         description="Let's work together and find a home you'll love."
       />
       <Header />
+      <Hero />
     </>
   );
 }

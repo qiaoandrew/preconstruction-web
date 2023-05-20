@@ -59,7 +59,7 @@
     @apply mx-5 xs:mx-7 xl:ml-10 xl:mr-0;
   }
 
-  .section {
+  .mb-section {
     @apply mb-21 last:mb-26 md:mb-36 md:last:mb-44;
   }
 

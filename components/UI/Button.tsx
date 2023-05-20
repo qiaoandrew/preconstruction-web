@@ -22,10 +22,11 @@ export default function Button({
   hierarchy,
   font,
   padding,
+  border,
   classes,
   children,
 }: ButtonProps) {
-  let buttonClasses = `rounded-full cursor-pointer text-md ${font} ${padding} ${classes} `;
+  let buttonClasses = `rounded-full cursor-pointer text-md ${font} ${padding} ${border} ${classes} `;
   if (hierarchy === 'primary') {
     buttonClasses += 'bg-gradient text-white';
   } else if (hierarchy === 'secondary') {

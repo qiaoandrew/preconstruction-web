@@ -1,4 +1,6 @@
-export const NESTED_ROUTES = [
+import { Route } from '@/types/types';
+
+export const NESTED_ROUTES: Route[] = [
   {
     type: 'dropdown',
     text: 'Buy a Home',

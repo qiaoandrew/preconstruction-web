@@ -20,6 +20,7 @@
     "eslint-config-next": "13.4.2",
     "firebase": "^9.22.0",
     "formik": "^2.2.9",
+    "lodash": "^4.17.21",
     "mapbox-gl": "^2.14.1",
     "next": "13.4.2",
     "postcss": "8.4.23",
@@ -33,6 +34,7 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@types/lodash.debounce": "^4.0.7",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0"
   }
