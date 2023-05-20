@@ -21,7 +21,7 @@ export function formatPrice(price: number): string {
   return '$' + formattedNumber;
 }
 
-export function getTimeAgo(datePosted: string): string {
+export function formatDatePosted(datePosted: string): string {
   const testDate = new Date(datePosted);
   if (isNaN(testDate.getTime())) {
     return 'Sold';
