@@ -5,6 +5,7 @@ import { Listing } from '@/types/types';
 import SEO from '@/components/SEO/SEO';
 import Header from '@/components/navigation/Header';
 import Hero from '@/components/sections/home/Hero';
+import Explore from '@/components/sections/home/Explore';
 
 type HomeProps = {
   blogs: any[];
@@ -21,6 +22,7 @@ export default function Home({ blogs, saleListings, rentListings }: HomeProps) {
       />
       <Header />
       <Hero />
+      <Explore />
     </>
   );
 }

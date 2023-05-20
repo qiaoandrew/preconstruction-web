@@ -2,7 +2,7 @@ import HeroSearchBar from './HeroSearchBar';
 
 export default function Hero() {
   return (
-    <section className='mx-container-sm section z-10 mt-21 text-center lg:mt-30'>
+    <section className='mx-container-sm mb-section z-10 mt-21 text-center lg:mt-30'>
       <h1 className='mx-auto mb-5 max-w-[558px] font-display text-6xl font-[750] leading-snug text-blue1 sm:text-7xl lg:mb-7 lg:text-9xl'>
         <span className='text-gradient'>
           Explore real estate with Metropolis.
