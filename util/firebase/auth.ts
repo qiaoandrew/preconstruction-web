@@ -14,12 +14,12 @@ import {
   deleteUser,
 } from 'firebase/auth';
 
-export const signIn = async (email: string, password: string) => {
+export const logIn = async (email: string, password: string) => {
   await signInWithEmailAndPassword(auth, email, password);
   return auth?.currentUser?.uid;
 };
 
-export const signInWithGoogle = async () => {
+export const logInWithGoogle = async () => {
   await signInWithPopup(auth, new GoogleAuthProvider());
   return auth?.currentUser?.uid;
 };

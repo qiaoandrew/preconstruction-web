@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 type SEOProps = {
   title: string;
-  description: string;
+  description?: string;
   keywords?: string;
 };
 
