@@ -4,6 +4,15 @@ export type User = {
   name: string;
 };
 
+export type BlogPreview = {
+  id: string;
+  link: string;
+  title: string;
+  date: string;
+  image: string;
+  description: string;
+};
+
 export type Route = {
   type: string;
   text: string;

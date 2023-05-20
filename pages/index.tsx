@@ -1,17 +1,18 @@
 import axios from 'axios';
 import { GetStaticProps } from 'next';
 import { getBlogPreviews } from '@/lib/notion';
-import { Listing } from '@/types/types';
+import { BlogPreview, Listing } from '@/types/types';
 import SEO from '@/components/SEO/SEO';
 import Header from '@/components/navigation/Header';
 import Hero from '@/components/sections/home/Hero';
 import Explore from '@/components/sections/home/Explore';
 import ListingsCarousel from '@/components/carousels/ListingsCarousel';
 import SellYourProperty from '@/components/sections/home/SellYourProperty';
+import BlogCarousel from '@/components/carousels/BlogCarousel';
 import { getPreConstructionListings } from '@/util/firebase/preConstructionListings';
 
 type HomeProps = {
-  blogs: any[];
+  blogs: BlogPreview[];
   preConstructionListings: Listing[];
   saleListings: Listing[];
   rentListings: Listing[];
@@ -48,6 +49,7 @@ export default function Home({
         listings={rentListings}
       />
       <SellYourProperty />
+      <BlogCarousel blogs={blogs} />
     </>
   );
 }
