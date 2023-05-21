@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Button from '@/components/UI/Button';
 import Carousel from '@/components/layout/Carousel';
 import { formatDatePosted } from '@/util/helpers';

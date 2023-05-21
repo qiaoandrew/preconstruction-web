@@ -51,3 +51,23 @@ export const validateForgotPassword = (values: any): any => {
 
   return errors;
 };
+
+export const validateSell = (values: any): any => {
+  const errors: any = {};
+
+  if (!values.name) {
+    errors.name = 'Please enter your name.';
+  }
+
+  if (!values.email) {
+    errors.email = 'Please enter your email.';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Please enter a valid email address.';
+  }
+
+  if (!values.address) {
+    errors.address = 'Please enter an address.';
+  }
+
+  return errors;
+};
