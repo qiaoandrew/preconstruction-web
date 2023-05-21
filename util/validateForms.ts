@@ -71,3 +71,64 @@ export const validateSell = (values: any): any => {
 
   return errors;
 };
+
+export const validateAddListing = (values: any): any => {
+  const errors: any = {};
+
+  if (!values.name) {
+    errors.name = 'Please enter your name.';
+  }
+
+  if (!values.email) {
+    errors.email = 'Please enter your email address.';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Please enter a valid email address.';
+  }
+
+  if (!values.aboutDevelopment) {
+    errors.aboutDevelopment =
+      'Please enter some information about the development.';
+  }
+
+  return errors;
+};
+
+export const validateContact = (values: any): any => {
+  const errors: any = {};
+
+  if (!values.name) {
+    errors.name = 'Please enter your name.';
+  }
+
+  if (!values.email) {
+    errors.email = 'Please enter your email address.';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Please enter a valid email address.';
+  }
+
+  if (!values.message) {
+    errors.message = 'Please enter a message.';
+  }
+
+  return errors;
+};
+
+export const validateReportProblem = (values: any): any => {
+  const errors: any = {};
+
+  if (!values.name) {
+    errors.name = 'Please enter your name.';
+  }
+
+  if (!values.email) {
+    errors.email = 'Please enter your email address.';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Please enter a valid email address.';
+  }
+
+  if (!values.problem) {
+    errors.problem = 'Please describe the problem.';
+  }
+
+  return errors;
+};
