@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { useFormik } from 'formik';
-import { logInWithGoogle } from '@/util/firebase/auth';
+import { logInWithGoogle, signUp } from '@/util/firebase/auth';
 import SEO from '@/components/SEO/SEO';
 import Header from '@/components/navigation/Header';
 import AccountContainer from '@/components/layout/AccountContainer';
@@ -14,6 +14,7 @@ import InputFeedback from '@/components/UI/InputFeedback';
 import { FcGoogle } from 'react-icons/fc';
 import { Eye, EyeOff } from 'react-feather';
 import { COLORS } from '@/constants/colors';
+import { validateSignUp } from '@/util/validateForms';
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -36,7 +37,32 @@ export default function SignUp() {
       password: '',
       confirmPassword: '',
     },
-    onSubmit: async (values) => {},
+    validate: validateSignUp,
+    onSubmit: async (values) => {
+      try {
+        await signUp(values.name, values.email, values.password);
+      } catch (error: any) {
+        const errorCode = error.code;
+
+        if (errorCode === 'auth/email-already-in-use') {
+          formik.setErrors({
+            email: 'Email already in use. Please log in instead.',
+          });
+        } else if (errorCode === 'auth/invalid-email') {
+          formik.setErrors({
+            email: 'Invalid email. Please enter a valid email.',
+          });
+        } else if (errorCode === 'auth/weak-password') {
+          formik.setErrors({
+            password: 'Password must be at least 6 characters.',
+          });
+        } else {
+          formik.setErrors({
+            confirmPassword: 'Something went wrong. Please try again.',
+          });
+        }
+      }
+    },
   });
 
   return (

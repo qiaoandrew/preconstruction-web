@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { useFormik } from 'formik';
-import { validateLogin } from '@/util/validateForms';
+import { validateLogIn } from '@/util/validateForms';
 import { logIn, logInWithGoogle } from '@/util/firebase/auth';
 import SEO from '@/components/SEO/SEO';
 import Header from '@/components/navigation/Header';
@@ -33,7 +33,7 @@ export default function LogIn() {
       email: '',
       password: '',
     },
-    validate: validateLogin,
+    validate: validateLogIn,
     onSubmit: async (values) => {
       try {
         await logIn(values.email, values.password);
