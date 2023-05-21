@@ -19,7 +19,7 @@ export default function BlogCarousel({ blogs }: BlogCarouselProps) {
         </Link>
       </div>
 
-      <Carousel gap='gap-6'>
+      <Carousel mrItem='mr-6'>
         {blogs.map((blog) => (
           <BlogCard
             placement='carousel'

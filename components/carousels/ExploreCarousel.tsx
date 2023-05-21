@@ -4,7 +4,7 @@ import { CARDS } from '../sections/home/Explore';
 
 export default function ExploreCarousel() {
   return (
-    <Carousel gap='gap-6'>
+    <Carousel mrItem='mr-6'>
       {CARDS.map((card) => (
         <ExploreCard
           placement='carousel'

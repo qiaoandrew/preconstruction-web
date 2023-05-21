@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
 import { Listing } from '@/types/types';
 import Carousel from '../layout/Carousel';
 import ListingCard from '../cards/ListingCard';
@@ -16,8 +14,6 @@ export default function ListingsCarousel({
   listings,
   route,
 }: ListingsCarouselProps) {
-  const user = useSelector((state: RootState) => state.auth.user);
-
   return (
     <section className='mb-section'>
       <div className='mx-container-sm mb-5 flex items-center justify-between'>
@@ -30,7 +26,7 @@ export default function ListingsCarousel({
         </Link>
       </div>
 
-      <Carousel gap='gap-6'>
+      <Carousel mrItem='mr-6'>
         {listings.map((listing) => (
           <ListingCard
             title={listing.title}

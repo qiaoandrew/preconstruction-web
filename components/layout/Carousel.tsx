@@ -3,11 +3,12 @@ import { ChevronLeft, ChevronRight } from 'react-feather';
 import { COLORS } from '@/constants/colors';
 
 type CarouselProps = {
-  gap: string;
+  mrItem: string;
+  classes?: string;
   children: React.ReactNode[];
 };
 
-export default function Carousel({ gap, children }: CarouselProps) {
+export default function Carousel({ mrItem, classes, children }: CarouselProps) {
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
@@ -19,13 +20,16 @@ export default function Carousel({ gap, children }: CarouselProps) {
   };
 
   return (
-    <div className='relative'>
+    <div className={`relative ${classes}`}>
       <div
         ref={carouselRef}
-        className={`no-scrollbar px-container-sm relative flex overflow-x-scroll scroll-smooth whitespace-nowrap ${gap}`}
+        className='no-scrollbar px-container-sm w-screen overflow-y-hidden overflow-x-scroll scroll-smooth whitespace-nowrap'
       >
         {children.map((child, i) => (
-          <div className='inline-flex self-stretch' key={`child-${i}`}>
+          <div
+            className={`inline-block ${mrItem} last:mr-0`}
+            key={`child-${i}`}
+          >
             {child}
           </div>
         ))}

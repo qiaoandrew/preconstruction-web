@@ -45,18 +45,18 @@ export type Listing = {
   documents?: Button[];
 };
 
-type Table = {
+export type Table = {
   title: string;
   listData?: string[];
   keyValueData?: Record<string, string>;
 };
 
-type List = {
+export type List = {
   title: string;
   data: string[];
 };
 
-type Button = {
+export type Button = {
   label: string;
   link: string;
 };

@@ -93,7 +93,7 @@ export default function PreConstruction() {
                       priceString={listing.priceString}
                       datePosted={listing.datePosted}
                       image={listing.images[0]}
-                      route={`/${type}/${listing.id}`}
+                      route={`/${type}/listings/${listing.id}`}
                       placement='search'
                       key={listing.id}
                     />

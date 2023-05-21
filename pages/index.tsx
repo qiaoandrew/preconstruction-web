@@ -69,7 +69,12 @@ export const getStaticProps: GetStaticProps = async () => {
       `${BASE_URL}/api/listings/search?type=lease&pageNum=1&resultsPerPage=5`
     );
     return {
-      props: { blogs, preConstructionListings, saleListings, rentListings },
+      props: {
+        blogs,
+        preConstructionListings: preConstructionListings.slice(0, 5),
+        saleListings,
+        rentListings,
+      },
       revalidate: 1,
     };
   } catch (error) {
