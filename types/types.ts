@@ -28,7 +28,7 @@ export type Listing = {
   priceLow: number;
   priceHigh: number;
   status?: string;
-  occupancyYear?: number;
+  occupancy?: number;
   datePosted: string;
   images: string[];
   longitude: number;

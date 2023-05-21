@@ -28,7 +28,7 @@ export default function Button({
   classes,
   children,
 }: ButtonProps) {
-  let buttonClasses = `relative rounded-full cursor-pointer text-md ${font} ${padding} ${border} ${classes} `;
+  let buttonClasses = `relative rounded-full outline-none cursor-pointer text-md ${font} ${padding} ${border} ${classes} `;
   if (hierarchy === 'primary') {
     buttonClasses += 'bg-gradient text-white';
   } else if (hierarchy === 'secondary') {

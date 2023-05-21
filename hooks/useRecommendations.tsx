@@ -10,18 +10,30 @@ export type Recommendation = {
   listing: Listing;
 };
 
-export default function useRecommendations(type: string, query: string) {
+export default function useRecommendations(
+  type: string,
+  query: string,
+  pageNum: number,
+  resultsPerPage: number,
+  filterValues?: any
+) {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const preConstructionListings = useSelector(
     (state: RootState) => state.preConstructionListings.preConstructionListings
   );
 
   const fetchRecommendations = useCallback(
-    async (query: string, type: string) => {
+    async (
+      query: string,
+      type: string,
+      pageNum: number,
+      resultsPerPage: number,
+      filterValues?: any
+    ) => {
       const { data: listings } = await axios.get<Listing[]>(
         `/api/listings/search?${
           query ? `query=${query}&` : ''
-        }type=${type}&pageNum=1&resultsPerPage=10`
+        }type=${type}&pageNum=${pageNum}&resultsPerPage=${resultsPerPage}}`
       );
 
       setRecommendations(
@@ -40,28 +52,75 @@ export default function useRecommendations(type: string, query: string) {
 
   useEffect(() => {
     if (type === 'pre-construction') {
-      if (query === '') {
-        setRecommendations(
-          preConstructionListings
-            .slice(0, 10)
-            .map((listing) => ({ listing, type: 'pre-construction' }))
-        );
-      } else {
-        setRecommendations(
-          preConstructionListings
-            .filter(
-              (listing) =>
-                listing.title.toLowerCase().startsWith(query.toLowerCase()) ||
-                listing.subtitle.includes(query.toLowerCase())
-            )
-            .slice(0, 10)
-            .map((listing) => ({ listing, type: 'pre-construction' }))
+      let queryFilteredListings = preConstructionListings;
+
+      if (query) {
+        queryFilteredListings = queryFilteredListings.filter(
+          (listing) =>
+            listing.title.toLowerCase().startsWith(query.toLowerCase()) ||
+            listing.subtitle.includes(query.toLowerCase())
         );
       }
+
+      console.log(filterValues);
+
+      if (filterValues) {
+        if (filterValues.price.at(0)) {
+          queryFilteredListings = queryFilteredListings.filter(
+            (listing) => Number(listing.priceLow) >= filterValues.price.at(0)
+          );
+        }
+
+        if (filterValues.price.at(1)) {
+          queryFilteredListings = queryFilteredListings.filter(
+            (listing) => Number(listing.priceHigh) <= filterValues.price.at(1)
+          );
+        }
+
+        if (filterValues.occupancy.size > 0) {
+          queryFilteredListings = queryFilteredListings.filter((listing) =>
+            filterValues.occupancy.has(listing.occupancy)
+          );
+        }
+
+        console.log(queryFilteredListings);
+
+        if (filterValues.status.size > 0) {
+          queryFilteredListings = queryFilteredListings.filter((listing) =>
+            filterValues.status.has(listing.status)
+          );
+        }
+      }
+
+      queryFilteredListings = queryFilteredListings.slice(
+        pageNum * resultsPerPage - resultsPerPage,
+        pageNum * resultsPerPage
+      );
+
+      setRecommendations(
+        queryFilteredListings.map((listing) => ({
+          listing,
+          type: 'pre-construction',
+        }))
+      );
     } else {
-      debouncedGetRecommendations.current(query, type);
+      debouncedGetRecommendations.current(
+        query,
+        type,
+        pageNum,
+        resultsPerPage,
+        filterValues
+      );
     }
-  }, [query, type, preConstructionListings, debouncedGetRecommendations]);
+  }, [
+    query,
+    type,
+    preConstructionListings,
+    debouncedGetRecommendations,
+    pageNum,
+    resultsPerPage,
+    filterValues,
+  ]);
 
   return recommendations;
 }
