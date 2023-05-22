@@ -1,4 +1,6 @@
+import { Recommendation } from '@/hooks/useRecommendations';
 import BlogCard from '../cards/BlogCard';
+import ListingCard from '../cards/ListingCard';
 import Row3 from '../layout/Row3';
 import Header from '../navigation/Header';
 import SearchBar from '../UI/SearchBar';
@@ -35,21 +37,36 @@ export default function SearchPage({
           />
         </div>
         <Row3>
-          {itemType === 'listings' ? (
-            <></>
-          ) : (
-            items.map((blog: BlogPreview) => (
-              <BlogCard
-                placement='grid'
-                title={blog.title}
-                description={blog.description}
-                image={blog.image}
-                date={blog.date}
-                route={`/blog/${blog.id}`}
-                key={blog.id}
-              />
-            ))
-          )}
+          {itemType === 'listings'
+            ? items.map((recommendation: Recommendation) => (
+                <ListingCard
+                  title={recommendation.listing.title}
+                  subtitle={recommendation.listing.subtitle}
+                  priceString={recommendation.listing.priceString}
+                  datePosted={recommendation.listing.datePosted}
+                  image={recommendation.listing.images[0]}
+                  route={`${
+                    recommendation.type === 'pre-construction'
+                      ? 'pre-construcion'
+                      : recommendation.type === 'sale'
+                      ? 'for-sale'
+                      : 'for-rent'
+                  }/listings/${recommendation.listing.id}`}
+                  placement='grid'
+                  key={recommendation.listing.id}
+                />
+              ))
+            : items.map((blog: BlogPreview) => (
+                <BlogCard
+                  placement='grid'
+                  title={blog.title}
+                  description={blog.description}
+                  image={blog.image}
+                  date={blog.date}
+                  route={`/blog/${blog.id}`}
+                  key={blog.id}
+                />
+              ))}
         </Row3>
       </div>
     </>
