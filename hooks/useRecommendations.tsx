@@ -62,8 +62,6 @@ export default function useRecommendations(
         );
       }
 
-      console.log(filterValues);
-
       if (filterValues) {
         if (filterValues.price.at(0)) {
           queryFilteredListings = queryFilteredListings.filter(
@@ -82,8 +80,6 @@ export default function useRecommendations(
             filterValues.occupancy.has(listing.occupancy)
           );
         }
-
-        console.log(queryFilteredListings);
 
         if (filterValues.status.size > 0) {
           queryFilteredListings = queryFilteredListings.filter((listing) =>

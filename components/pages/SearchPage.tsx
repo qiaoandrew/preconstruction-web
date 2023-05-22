@@ -45,7 +45,7 @@ export default function SearchPage({
                   priceString={recommendation.listing.priceString}
                   datePosted={recommendation.listing.datePosted}
                   image={recommendation.listing.images[0]}
-                  route={`${
+                  route={`/${
                     recommendation.type === 'pre-construction'
                       ? 'pre-construcion'
                       : recommendation.type === 'sale'

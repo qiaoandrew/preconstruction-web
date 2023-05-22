@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import useRecommendations, { Recommendation } from '@/hooks/useRecommendations';
+import useRecommendations from '@/hooks/useRecommendations';
 import SEO from '@/components/SEO/SEO';
 import Header from '@/components/navigation/Header';
 import SearchBar from '@/components/UI/SearchBar';
@@ -14,6 +14,7 @@ import { useRouter } from 'next/router';
 export default function PreConstruction() {
   const router = useRouter();
   const { query } = router.query;
+
   const [searchQuery, setSearchQuery] = useState((query as string) || '');
   const [showFilter, setShowFilter] = useState(false);
   const [pageNum, setPageNum] = useState(1);
