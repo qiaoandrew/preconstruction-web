@@ -34,7 +34,7 @@ export default function Filter({
           : 'pointer-events-none opacity-0'
       }`}
     >
-      <div className='max-h-[50vh] overflow-scroll overscroll-contain rounded-lg border border-blueGrey2 bg-white px-6 pb-10 pt-6 text-left'>
+      <div className='no-scrollbar max-h-[50vh] overflow-y-scroll overscroll-contain rounded-lg border border-blueGrey2 bg-white px-6 pb-10 pt-6 text-left'>
         {filters.map((filter) => (
           <div className='mb-9 last:mb-0' key={filter.id}>
             <p className='mb-4 text-lg font-medium'>{filter.label}</p>
@@ -109,7 +109,11 @@ function Select({
       }
       setFilterValues({ ...filterValues, [id]: newFilterValues });
     } else {
-      setFilterValues({ ...filterValues, [id]: new Set([option]) });
+      if (newFilterValues.has(option)) {
+        setFilterValues({ ...filterValues, [id]: new Set() });
+      } else {
+        setFilterValues({ ...filterValues, [id]: new Set([option]) });
+      }
     }
   };
 

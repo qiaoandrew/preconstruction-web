@@ -6,12 +6,12 @@ import { RootState } from '@/store/store';
 import { Listing } from '@/types/types';
 
 export type Recommendation = {
-  type: string;
+  type: 'pre-construction' | 'sale' | 'rent';
   listing: Listing;
 };
 
 export default function useRecommendations(
-  type: string,
+  type: 'pre-construction' | 'sale' | 'rent',
   query: string,
   pageNum: number,
   resultsPerPage: number,
@@ -25,23 +25,29 @@ export default function useRecommendations(
   const fetchRecommendations = useCallback(
     async (
       query: string,
-      type: string,
+      type: 'pre-construction' | 'sale' | 'rent',
       pageNum: number,
       resultsPerPage: number,
       filterValues?: any
     ) => {
-      const { data: listings } = await axios.get<Listing[]>(
-        `/api/listings/search?${
-          query ? `query=${query}&` : ''
-        }type=${type}&pageNum=${pageNum}&resultsPerPage=${resultsPerPage}}`
-      );
+      console.log(filterValues);
 
-      setRecommendations(
-        listings.map((listing) => ({
-          listing,
-          type,
-        }))
-      );
+      try {
+        const { data: listings } = await axios.get<Listing[]>(
+          `/api/listings/search?${query ? `query=${query}&` : ''}type=${
+            type === 'sale' ? 'sale' : 'lease'
+          }&pageNum=${pageNum}&resultsPerPage=${resultsPerPage}`
+        );
+
+        setRecommendations(
+          listings.map((listing) => ({
+            listing,
+            type,
+          }))
+        );
+      } catch (error) {
+        console.log('Error occured!', error);
+      }
     },
     []
   );

@@ -15,7 +15,7 @@ export default function PreConstruction() {
   const router = useRouter();
   const { query } = router.query;
 
-  const [searchQuery, setSearchQuery] = useState((query as string) || '');
+  const [searchQuery, setSearchQuery] = useState(query ? query.toString() : '');
   const [showFilter, setShowFilter] = useState(false);
   const [pageNum, setPageNum] = useState(1);
   const [showMobileMap, setShowMobileMap] = useState(false);
@@ -97,7 +97,7 @@ export default function PreConstruction() {
                       priceString={listing.priceString}
                       datePosted={listing.datePosted}
                       image={listing.images[0]}
-                      route={`/${type}/listings/${listing.id}`}
+                      route={`/pre-construction/listings/${listing.id}`}
                       placement='search'
                       key={listing.id}
                     />
