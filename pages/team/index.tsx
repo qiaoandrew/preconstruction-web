@@ -13,7 +13,6 @@ type TeamProps = {
 };
 
 export default function Team({ team }: TeamProps) {
-  console.log(team);
   return (
     <>
       <SEO title='Team | REMAX Metropolis' />

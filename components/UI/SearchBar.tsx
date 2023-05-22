@@ -5,7 +5,7 @@ type SearchBarProps = {
   handleChangeQuery: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   showFilterButton: boolean;
-  filterButtonOnClick: () => void;
+  filterButtonOnClick?: () => void;
   classes?: string;
 };
 
