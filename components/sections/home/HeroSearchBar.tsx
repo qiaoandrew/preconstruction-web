@@ -80,7 +80,7 @@ export default function HeroSearchBar() {
 
       <Button
         type='route'
-        route={`/${selectedItem.route}/listings&query=${query}`}
+        route={`/${selectedItem.route}?query=${query}`}
         hierarchy='primary'
         padding='px-10 py-3.5'
         font='font-medium'

@@ -21,7 +21,7 @@ export default function HeroRecommendations({
 }: RecommendationsProps) {
   return (
     <div
-      className={`transition-300 absolute inset-x-0 ${
+      className={`transition-300 absolute inset-x-0 z-10 ${
         isRecommendationsVisible
           ? 'pointer-events-auto opacity-100'
           : 'pointer-events-none opacity-0'

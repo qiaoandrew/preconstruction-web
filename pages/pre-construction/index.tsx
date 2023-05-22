@@ -9,9 +9,12 @@ import { COLORS } from '@/constants/colors';
 import ListingsMap from '@/components/map/ListingsMap';
 import Filter from '@/components/UI/Filter';
 import { PRE_CONSTRUCTION_FILTERS } from '@/constants/filters';
+import { useRouter } from 'next/router';
 
 export default function PreConstruction() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
+  const { query } = router.query;
+  const [searchQuery, setSearchQuery] = useState((query as string) || '');
   const [showFilter, setShowFilter] = useState(false);
   const [pageNum, setPageNum] = useState(1);
   const [showMobileMap, setShowMobileMap] = useState(false);
