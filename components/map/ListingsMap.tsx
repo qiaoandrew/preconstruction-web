@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
-import { ListingRecommendationType } from '@/hooks/useRecommendations';
 import ListingPopup from './ListingPopup';
+import { ListingRecommendationType } from '@/types/types';
 import Map, {
   Marker,
   Popup,
