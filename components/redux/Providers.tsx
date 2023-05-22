@@ -29,6 +29,7 @@ function Redux({ children }: { children: React.ReactNode }) {
             uid: user.uid,
             email: user.email,
             name: user.displayName,
+            provider: user.providerData[0].providerId,
           } as User)
         );
       } else {

@@ -103,4 +103,14 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  .filter-blue1 {
+    filter: invert(4%) sepia(24%) saturate(7488%) hue-rotate(230deg)
+      brightness(96%) contrast(93%);
+  }
+
+  .filter-white {
+    filter: invert(99%) sepia(46%) saturate(281%) hue-rotate(224deg)
+      brightness(113%) contrast(98%);
+  }
 }
