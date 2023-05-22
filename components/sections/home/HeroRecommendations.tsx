@@ -34,7 +34,7 @@ export default function HeroRecommendations({
             ({ type, listing }: Recommendation, i: number) => (
               <Fragment key={listing.id}>
                 <Link
-                  href={`/listings/${type}/${listing.id}`}
+                  href={`/${type}/listings/${listing.id}`}
                   className='transition-300 flex items-center justify-between hover:bg-grey1'
                 >
                   <div className='flex flex-1 items-center justify-between gap-6 p-4'>
