@@ -31,8 +31,6 @@ export default function useRecommendations(
       resultsPerPage: number,
       filterValues?: any
     ) => {
-      console.log(filterValues);
-
       try {
         const { data: listings } = await axios.get<ListingType[]>(
           `/api/listings/search?${query ? `query=${query}&` : ''}type=${

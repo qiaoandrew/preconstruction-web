@@ -16,7 +16,6 @@ export default function HeroSearchBar() {
   const [selectedItem, setSelectedItem] = useState({
     label: 'Pre-Construction',
     value: 'pre-construction',
-    route: 'pre-construction',
   });
 
   const searchBarRef = useRef<HTMLInputElement>(null);
@@ -86,7 +85,7 @@ export default function HeroSearchBar() {
 
       <Button
         type='route'
-        route={`/${selectedItem.route}?query=${query}`}
+        route={`/${selectedItem.value}?query=${query}`}
         hierarchy='primary'
         padding='px-10 py-3.5'
         font='font-medium'

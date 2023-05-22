@@ -1,15 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { Fragment } from 'react';
 import Link from 'next/link';
-import { ListingType } from '@/types/types';
-
-export type Recommendation = {
-  type: string;
-  listing: ListingType;
-};
+import { ListingRecommendationType } from '@/types/types';
 
 type RecommendationsProps = {
-  recommendations: Recommendation[];
+  recommendations: ListingRecommendationType[];
   isRecommendationsVisible: boolean;
   searchBarHeight: number;
 };
@@ -31,7 +26,7 @@ export default function HeroRecommendations({
       <div className='no-scrollbar transition-300 mx-auto max-h-[300px] max-w-[560px] overflow-y-scroll overscroll-y-contain rounded-xl border border-blueGrey2 bg-white text-left lg:max-w-[720px]'>
         {recommendations.length > 0 ? (
           recommendations.map(
-            ({ type, listing }: Recommendation, i: number) => (
+            ({ type, listing }: ListingRecommendationType, i: number) => (
               <Fragment key={listing.id}>
                 <Link
                   href={`/${type}/listings/${listing.id}`}

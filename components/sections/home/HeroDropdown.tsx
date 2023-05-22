@@ -4,19 +4,18 @@ const DROPDOWN_ITEMS = [
   {
     label: 'Pre-Construction',
     value: 'pre-construction',
-    route: 'pre-construction',
   },
-  { label: 'For Sale', value: 'sale', route: 'for-sale' },
-  { label: 'For Rent', value: 'rent', route: 'for-rent' },
+  { label: 'For Sale', value: 'for-sale' },
+  { label: 'For Rent', value: 'for-rent' },
 ];
 
 type HeroDropdownProps = {
   dropdownRef: React.RefObject<HTMLDivElement>;
   isDropdownOpen: boolean;
   setIsDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedItem: { label: string; value: string; route: string };
+  selectedItem: { label: string; value: string };
   setSelectedItem: React.Dispatch<
-    React.SetStateAction<{ label: string; value: string; route: string }>
+    React.SetStateAction<{ label: string; value: string }>
   >;
 };
 
