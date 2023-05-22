@@ -7,7 +7,7 @@ const DROPDOWN_ITEMS = [
     route: 'pre-construction',
   },
   { label: 'For Sale', value: 'sale', route: 'for-sale' },
-  { label: 'For Rent', value: 'lease', route: 'for-rent' },
+  { label: 'For Rent', value: 'rent', route: 'for-rent' },
 ];
 
 type HeroDropdownProps = {

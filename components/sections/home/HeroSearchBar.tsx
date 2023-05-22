@@ -21,7 +21,12 @@ export default function HeroSearchBar() {
   const searchBarRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const recommendations = useRecommendations(selectedItem.value, query, 1, 10);
+  const recommendations = useRecommendations(
+    selectedItem.value as 'pre-construction' | 'sale' | 'rent',
+    query,
+    1,
+    10
+  );
 
   useEffect(() => {
     const setHeight = () => {
