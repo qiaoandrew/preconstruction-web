@@ -1,13 +1,13 @@
 import axios from 'axios';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { Listing } from '@/types/types';
+import { ListingType } from '@/types/types';
 import { parseListing } from '@/util/helpers';
 
 const REPLIERS_API_KEY = process.env.REPLIERS_API_KEY;
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Listing[]>
+  res: NextApiResponse<ListingType[]>
 ) {
   if (req.method !== 'GET')
     return res.status(405).end({ message: 'Method not allowed.' });
@@ -30,7 +30,7 @@ export default async function handler(
       config
     );
 
-    const listings: Listing[] = data.listings.map((listing: any) =>
+    const listings: ListingType[] = data.listings.map((listing: any) =>
       parseListing(listing)
     );
 

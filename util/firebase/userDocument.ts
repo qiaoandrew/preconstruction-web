@@ -7,7 +7,7 @@ import {
   where,
   updateDoc,
 } from 'firebase/firestore';
-import { User } from '@/types/types';
+import { UserType } from '@/types/types';
 
 export type UserDocument = {
   uid: string;
@@ -16,7 +16,7 @@ export type UserDocument = {
   type: 'buyer' | 'agent';
 };
 
-export const createUserDocument = async (user: User) => {
+export const createUserDocument = async (user: UserType) => {
   const usersRef = collection(db, 'users');
   const searchQuery = query(usersRef, where('uid', '==', user.uid));
   const querySnapshot = await getDocs(searchQuery);

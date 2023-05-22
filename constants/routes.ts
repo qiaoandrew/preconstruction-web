@@ -1,6 +1,6 @@
-import { Route } from '@/types/types';
+import { MenuRouteType } from '@/types/types';
 
-export const NESTED_ROUTES: Route[] = [
+export const NESTED_ROUTES: MenuRouteType[] = [
   {
     type: 'dropdown',
     text: 'Buy a Home',

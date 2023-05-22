@@ -1,16 +1,9 @@
 import AgentCard from '@/components/cards/AgentCard';
 import Row3 from '@/components/layout/Row3';
-
-export type Agent = {
-  name: string;
-  email?: string;
-  phone?: string;
-  image?: string;
-  position: string;
-};
+import { AgentType } from '@/types/types';
 
 type AgentsProps = {
-  team: Agent[];
+  team: AgentType[];
 };
 
 export default function Agents({ team }: AgentsProps) {

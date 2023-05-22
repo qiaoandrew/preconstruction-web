@@ -3,8 +3,9 @@ import useRecommendations from '@/hooks/useRecommendations';
 import Button from '@/components/UI/Button';
 import HeroRecommendations from './HeroRecommendations';
 import HeroDropdown from './HeroDropdown';
-import { Search } from 'react-feather';
 import { COLORS } from '@/constants/colors';
+import { ListingGroupType } from '@/types/types';
+import { Search } from 'react-feather';
 
 export default function HeroSearchBar() {
   const [query, setQuery] = useState('');
@@ -22,7 +23,7 @@ export default function HeroSearchBar() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const recommendations = useRecommendations(
-    selectedItem.value as 'pre-construction' | 'sale' | 'rent',
+    selectedItem.value as ListingGroupType,
     query,
     1,
     10

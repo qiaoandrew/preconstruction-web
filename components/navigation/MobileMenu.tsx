@@ -8,7 +8,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import Button from '../UI/Button';
 import { NESTED_ROUTES } from '@/constants/routes';
-import { Route } from '@/types/types';
+import { MenuRouteType } from '@/types/types';
 import { ChevronDown } from 'react-feather';
 
 export default function MobileMenu() {
@@ -44,7 +44,7 @@ export default function MobileMenu() {
         </Button>
       </div>
       <nav className='flex flex-grow flex-col gap-5 overflow-x-hidden overflow-y-scroll pb-4'>
-        {(NESTED_ROUTES as Route[]).map((route) => {
+        {(NESTED_ROUTES as MenuRouteType[]).map((route) => {
           if (route.type === 'dropdown') {
             return (
               <Dropdown
@@ -135,7 +135,7 @@ export default function MobileMenu() {
 }
 
 type DropdownProps = {
-  route: Route;
+  route: MenuRouteType;
   openDropdown: string;
   setOpenDropdown: (value: string) => void;
 };

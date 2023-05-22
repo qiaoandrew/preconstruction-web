@@ -1,4 +1,4 @@
-import { Listing } from '@/types/types';
+import { ListingType } from '@/types/types';
 
 export function decode(value: any): any {
   if (value instanceof Array) {
@@ -92,7 +92,7 @@ export function calculateHiddenClasses(i: number, length: number): string {
   return hiddenClasses;
 }
 
-export function parseListing(unParsedListing: any): Listing {
+export function parseListing(unParsedListing: any): ListingType {
   return {
     id: unParsedListing.mlsNumber,
     title: `${unParsedListing.address.streetNumber} ${

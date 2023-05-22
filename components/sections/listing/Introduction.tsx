@@ -2,14 +2,14 @@
 import Button from '@/components/UI/Button';
 import Carousel from '@/components/layout/Carousel';
 import { formatDatePosted } from '@/util/helpers';
-import { Button as ButtonType } from '@/types/types';
+import { ButtonType, ListingGroupType } from '@/types/types';
 import useIsListingSaved from '@/hooks/useIsListingSaved';
 import { COLORS } from '@/constants/colors';
 import { TbHeartPlus, TbHeartMinus } from 'react-icons/tb';
 
 type ListingIntroductionProps = {
   id: string;
-  type: 'pre-construction' | 'sale' | 'rent';
+  type: ListingGroupType;
   title: string;
   subtitle: string;
   priceString: string;

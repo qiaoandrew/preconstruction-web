@@ -1,4 +1,4 @@
-import { List as ListType } from '@/types/types';
+import { ListType } from '@/types/types';
 
 export default function List({ title, data }: ListType) {
   return (

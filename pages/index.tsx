@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { GetStaticProps } from 'next';
 import { getBlogPreviews } from '@/lib/notion';
-import { BlogPreview, Listing } from '@/types/types';
+import { BlogPreviewType, ListingType } from '@/types/types';
 import SEO from '@/components/SEO/SEO';
 import Header from '@/components/navigation/Header';
 import Hero from '@/components/sections/home/Hero';
@@ -13,10 +13,10 @@ import Footer from '@/components/navigation/Footer';
 import { getPreConstructionListings } from '@/util/firebase/preConstructionListings';
 
 type HomeProps = {
-  blogs: BlogPreview[];
-  preConstructionListings: Listing[];
-  saleListings: Listing[];
-  rentListings: Listing[];
+  blogs: BlogPreviewType[];
+  preConstructionListings: ListingType[];
+  saleListings: ListingType[];
+  rentListings: ListingType[];
 };
 
 export default function Home({

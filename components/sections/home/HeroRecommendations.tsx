@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import { Fragment } from 'react';
 import Link from 'next/link';
-import { Listing } from '@/types/types';
+import { ListingType } from '@/types/types';
 
 export type Recommendation = {
   type: string;
-  listing: Listing;
+  listing: ListingType;
 };
 
 type RecommendationsProps = {

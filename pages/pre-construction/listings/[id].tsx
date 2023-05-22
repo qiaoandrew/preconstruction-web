@@ -1,12 +1,12 @@
 import { GetServerSideProps } from 'next';
 import { getPreConstructionListings } from '@/util/firebase/preConstructionListings';
-import { Listing } from '@/types/types';
+import { ListingType } from '@/types/types';
 import ListingPage from '@/components/pages/ListingPage';
 
 export default function PreConstructionListing({
   listing,
 }: {
-  listing: Listing;
+  listing: ListingType;
 }) {
   return <ListingPage type='pre-construction' {...listing} />;
 }

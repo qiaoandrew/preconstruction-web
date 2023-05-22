@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
+import { PlacementType } from '@/types/types';
 import { ArrowRight } from 'react-feather';
-import remaxGraphic from '@/public/img/logos/graphic.png';
 import { COLORS } from '@/constants/colors';
+import remaxGraphic from '@/public/img/logos/graphic.png';
 
 type BlogCardProps = {
-  placement: 'carousel' | 'grid' | 'search';
+  placement: PlacementType;
   title: string;
   description: string;
   date: string;

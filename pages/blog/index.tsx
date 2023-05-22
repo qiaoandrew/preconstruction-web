@@ -3,11 +3,11 @@ import { GetStaticProps } from 'next';
 import SEO from '@/components/SEO/SEO';
 import SearchPage from '@/components/pages/SearchPage';
 import Footer from '@/components/navigation/Footer';
-import { BlogPreview } from '@/types/types';
+import { BlogPreviewType } from '@/types/types';
 import { getBlogPreviews } from '@/lib/notion';
 
 type BlogsProps = {
-  blogs: BlogPreview[];
+  blogs: BlogPreviewType[];
 };
 
 export default function Blog({ blogs }: BlogsProps) {
@@ -24,7 +24,7 @@ export default function Blog({ blogs }: BlogsProps) {
         placeholder='Search blogs...'
         searchQuery={searchQuery}
         handleChangeQuery={handleChangeQuery}
-        itemType='blog'
+        itemType='blogs'
         items={blogs.filter(
           (blog) =>
             blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

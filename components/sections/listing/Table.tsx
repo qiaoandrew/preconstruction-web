@@ -1,4 +1,4 @@
-import { Table as TableType } from '@/types/types';
+import { TableType } from '@/types/types';
 import { calculateHiddenClasses } from '@/util/helpers';
 
 export default function Table({ title, listData, keyValueData }: TableType) {

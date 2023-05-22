@@ -1,5 +1,5 @@
 import { Client } from '@notionhq/client';
-import { BlogPreview } from '@/types/types';
+import { BlogPreviewType } from '@/types/types';
 import { changeGoogleDriveURL } from '@/util/helpers';
 
 const API_KEY = process.env.NEXT_PUBLIC_NOTION_API_KEY;
@@ -18,7 +18,7 @@ const getDatabase = async () => {
 /**
  * Get blog previews.
  */
-export const getBlogPreviews = async (): Promise<BlogPreview[]> => {
+export const getBlogPreviews = async (): Promise<BlogPreviewType[]> => {
   const blogs = await getDatabase();
   return blogs.map((blog: any) => {
     const id = blog.properties.ID.rich_text[0].text.content;

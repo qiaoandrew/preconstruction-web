@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { ChevronDown } from 'react-feather';
 import { NESTED_ROUTES } from '@/constants/routes';
-import { Route } from '@/types/types';
+import { MenuRouteType } from '@/types/types';
 import { COLORS } from '@/constants/colors';
+import { ChevronDown } from 'react-feather';
 
 export default function DesktopMenu() {
   return (
@@ -25,7 +25,7 @@ export default function DesktopMenu() {
   );
 }
 
-function MenuDropdown({ route }: { route: Route }) {
+function MenuDropdown({ route }: { route: MenuRouteType }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (

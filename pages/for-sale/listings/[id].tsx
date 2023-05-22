@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import ListingPage from '@/components/pages/ListingPage';
-import { Listing } from '@/types/types';
+import { ListingType } from '@/types/types';
 
 type ForSaleListingProps = {
-  listing: Listing;
+  listing: ListingType;
 };
 
 export default function ForSaleListing({ listing }: ForSaleListingProps) {
-  return <ListingPage type='sale' {...listing} />;
+  return <ListingPage type='for-sale' {...listing} />;
 }
 
 const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;

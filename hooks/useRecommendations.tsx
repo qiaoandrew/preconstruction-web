@@ -3,21 +3,22 @@ import { debounce } from 'lodash';
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
-import { Listing } from '@/types/types';
-
-export type Recommendation = {
-  type: 'pre-construction' | 'sale' | 'rent';
-  listing: Listing;
-};
+import {
+  ListingType,
+  ListingGroupType,
+  ListingRecommendationType,
+} from '@/types/types';
 
 export default function useRecommendations(
-  type: 'pre-construction' | 'sale' | 'rent',
+  type: ListingGroupType,
   query: string,
   pageNum: number,
   resultsPerPage: number,
   filterValues?: any
 ) {
-  const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+  const [recommendations, setRecommendations] = useState<
+    ListingRecommendationType[]
+  >([]);
   const preConstructionListings = useSelector(
     (state: RootState) => state.preConstructionListings.preConstructionListings
   );
@@ -25,7 +26,7 @@ export default function useRecommendations(
   const fetchRecommendations = useCallback(
     async (
       query: string,
-      type: 'pre-construction' | 'sale' | 'rent',
+      type: ListingGroupType,
       pageNum: number,
       resultsPerPage: number,
       filterValues?: any
@@ -33,9 +34,9 @@ export default function useRecommendations(
       console.log(filterValues);
 
       try {
-        const { data: listings } = await axios.get<Listing[]>(
+        const { data: listings } = await axios.get<ListingType[]>(
           `/api/listings/search?${query ? `query=${query}&` : ''}type=${
-            type === 'sale' ? 'sale' : 'lease'
+            type === 'for-sale' ? 'sale' : 'lease'
           }&pageNum=${pageNum}&resultsPerPage=${resultsPerPage}`
         );
 
@@ -46,7 +47,7 @@ export default function useRecommendations(
           }))
         );
       } catch (error) {
-        console.log('Error occured!', error);
+        console.log(error);
       }
     },
     []

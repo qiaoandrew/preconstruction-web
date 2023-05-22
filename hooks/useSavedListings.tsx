@@ -10,10 +10,12 @@ import {
   where,
 } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
-import { Recommendation } from './useRecommendations';
+import { ListingRecommendationType } from '@/types/types';
 
 export default function useSavedListings(searchQuery: string) {
-  const [savedListings, setSavedListings] = useState<Recommendation[]>([]);
+  const [savedListings, setSavedListings] = useState<
+    ListingRecommendationType[]
+  >([]);
 
   const user = useSelector((state: RootState) => state.auth.user);
   const preConstructionListings = useSelector(

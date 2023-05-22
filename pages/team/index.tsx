@@ -6,10 +6,10 @@ import { getTeam } from '@/util/firebase/team';
 import Milestones from '@/components/sections/team/Milestones';
 import Footer from '@/components/navigation/Footer';
 import Agents from '@/components/sections/team/Agents';
-import { Agent } from '@/components/sections/team/Agents';
+import { AgentType } from '@/types/types';
 
 type TeamProps = {
-  team: Agent[];
+  team: AgentType[];
 };
 
 export default function Team({ team }: TeamProps) {

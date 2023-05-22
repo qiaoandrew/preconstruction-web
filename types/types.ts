@@ -1,11 +1,23 @@
-export type User = {
+export type ListingGroupType = 'pre-construction' | 'for-sale' | 'for-rent';
+
+export type PlacementType = 'carousel' | 'grid' | 'search';
+
+export type UserType = {
   uid: string;
   email: string;
   name: string;
   provider: string;
 };
 
-export type BlogPreview = {
+export type AgentType = {
+  name: string;
+  email?: string;
+  phone?: string;
+  image?: string;
+  position: string;
+};
+
+export type BlogPreviewType = {
   id: string;
   link: string;
   title: string;
@@ -14,14 +26,14 @@ export type BlogPreview = {
   description: string;
 };
 
-export type Route = {
+export type MenuRouteType = {
   type: string;
   text: string;
   link?: string;
   dropdown?: { text: string; link: string }[];
 };
 
-export type Listing = {
+export type ListingType = {
   id: string;
   title: string;
   subtitle: string;
@@ -40,24 +52,29 @@ export type Listing = {
   bathrooms: number;
   bedrooms: number;
   parking: number;
-  tables?: Table[];
-  lists?: List[];
-  links?: Button[];
-  documents?: Button[];
+  tables?: TableType[];
+  lists?: ListType[];
+  links?: ButtonType[];
+  documents?: ButtonType[];
 };
 
-export type Table = {
+export type TableType = {
   title: string;
   listData?: string[];
   keyValueData?: Record<string, string>;
 };
 
-export type List = {
+export type ListType = {
   title: string;
   data: string[];
 };
 
-export type Button = {
+export type ButtonType = {
   label: string;
   link: string;
+};
+
+export type ListingRecommendationType = {
+  type: ListingGroupType;
+  listing: ListingType;
 };

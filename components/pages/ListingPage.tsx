@@ -7,13 +7,14 @@ import Table from '../sections/listing/Table';
 import List from '../sections/listing/List';
 import Button from '../UI/Button';
 import {
-  Button as ButtonType,
-  List as ListType,
-  Table as TableType,
+  ButtonType,
+  ListType,
+  ListingGroupType,
+  TableType,
 } from '@/types/types';
 
 type ListingPageProps = {
-  type: 'pre-construction' | 'sale' | 'rent';
+  type: ListingGroupType;
   id: string;
   title: string;
   subtitle: string;

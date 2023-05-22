@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { formatDatePosted } from '@/util/helpers';
+import { PlacementType } from '@/types/types';
 
 type ListingCardProps = {
   title: string;
@@ -11,7 +12,7 @@ type ListingCardProps = {
   datePosted: string;
   image: string;
   route: string;
-  placement: 'carousel' | 'grid' | 'search';
+  placement: PlacementType;
 };
 
 export default function ListingCard({

@@ -1,9 +1,8 @@
 import { useMemo, useState } from 'react';
-import { Listing } from '@/types/types';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
+import { ListingRecommendationType } from '@/hooks/useRecommendations';
 import ListingPopup from './ListingPopup';
-import { Recommendation } from '@/hooks/useRecommendations';
 import Map, {
   Marker,
   Popup,
@@ -12,39 +11,43 @@ import Map, {
   NavigationControl,
   ScaleControl,
 } from 'react-map-gl';
-import { HiMapPin } from 'react-icons/hi2';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { HiMapPin } from 'react-icons/hi2';
 
 const MAPBOX_ACCESS_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 type ListingsMapProps = {
-  recommendations: Recommendation[];
+  recommendations: ListingRecommendationType[];
 };
 
 export default function ListingsMap({ recommendations }: ListingsMapProps) {
-  const [popup, setPopup] = useState<Recommendation | null>(null);
+  const [popup, setPopup] = useState<ListingRecommendationType | null>(null);
 
   const user = useSelector((state: RootState) => state.auth.user);
 
-  const handlePopupOpen = (e: any, recommendation: Recommendation) => {
+  const handlePopupOpen = (
+    e: any,
+    recommendation: ListingRecommendationType
+  ) => {
     e.originalEvent.stopPropagation();
     setPopup(recommendation);
   };
 
   const pins = useMemo(
     () =>
-      recommendations.map(({ listing, type }: Recommendation, i: number) =>
-        listing.longitude ? (
-          <Marker
-            longitude={listing.longitude}
-            latitude={listing.latitude}
-            anchor='bottom'
-            onClick={(e: any) => handlePopupOpen(e, { listing, type })}
-            key={`marker-${i}`}
-          >
-            <HiMapPin size={24} color='#D23A2E' className='cursor-pointer' />
-          </Marker>
-        ) : null
+      recommendations.map(
+        ({ listing, type }: ListingRecommendationType, i: number) =>
+          listing.longitude ? (
+            <Marker
+              longitude={listing.longitude}
+              latitude={listing.latitude}
+              anchor='bottom'
+              onClick={(e: any) => handlePopupOpen(e, { listing, type })}
+              key={`marker-${i}`}
+            >
+              <HiMapPin size={24} color='#D23A2E' className='cursor-pointer' />
+            </Marker>
+          ) : null
       ),
     [recommendations]
   );
@@ -79,13 +82,7 @@ export default function ListingsMap({ recommendations }: ListingsMapProps) {
             subtitle={popup.listing.subtitle}
             image={popup.listing.images[0]}
             closePopup={() => setPopup(null)}
-            route={`/${
-              popup.type === 'pre-construction'
-                ? popup.type
-                : popup.type === 'sale'
-                ? 'for-sale'
-                : 'for-rent'
-            }/listings/${popup.listing.id}`}
+            route={`/${popup.type}/listings/${popup.listing.id}`}
           />
         </Popup>
       )}

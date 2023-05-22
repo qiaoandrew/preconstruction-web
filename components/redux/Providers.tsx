@@ -7,7 +7,7 @@ import { auth, rdb } from '@/lib/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { onValue, ref } from 'firebase/database';
 import { decode } from '@/util/helpers';
-import { User } from '@/types/types';
+import { UserType } from '@/types/types';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -30,7 +30,7 @@ function Redux({ children }: { children: React.ReactNode }) {
             email: user.email,
             name: user.displayName,
             provider: user.providerData[0].providerId,
-          } as User)
+          } as UserType)
         );
       } else {
         dispatch(setUser(null));

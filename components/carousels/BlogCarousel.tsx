@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import Carousel from '../layout/Carousel';
 import BlogCard from '../cards/BlogCard';
-import { BlogPreview } from '@/types/types';
+import { BlogPreviewType } from '@/types/types';
 
 type BlogCarouselProps = {
-  blogs: BlogPreview[];
+  blogs: BlogPreviewType[];
 };
 
 export default function BlogCarousel({ blogs }: BlogCarouselProps) {

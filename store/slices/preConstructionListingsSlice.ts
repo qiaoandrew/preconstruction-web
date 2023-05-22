@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Listing } from '@/types/types';
+import { ListingType } from '@/types/types';
 
 interface PreConstructionListingsState {
-  preConstructionListings: Listing[];
+  preConstructionListings: ListingType[];
   loading: boolean;
 }
 
@@ -15,7 +15,7 @@ const preConstructionListingsSlice = createSlice({
   name: 'preConstructionListings',
   initialState,
   reducers: {
-    setPreConstructionListings: (state, action: { payload: Listing[] }) => {
+    setPreConstructionListings: (state, action: { payload: ListingType[] }) => {
       state.preConstructionListings = action.payload;
       state.loading = false;
     },

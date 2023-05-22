@@ -13,16 +13,14 @@ import {
   addDoc,
 } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { ListingGroupType } from '@/types/types';
 
 type SavedListing = {
-  type: 'pre-construction' | 'sale' | 'rent';
+  type: ListingGroupType;
   id: string;
 };
 
-export default function useIsListingSaved(
-  type: 'pre-construction' | 'sale' | 'rent',
-  id: string
-) {
+export default function useIsListingSaved(type: ListingGroupType, id: string) {
   const [isSaved, setIsSaved] = useState(false);
 
   const user = useSelector((state: RootState) => state.auth.user);

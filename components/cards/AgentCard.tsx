@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { Agent } from '../sections/team/Agents';
-import defaultIcon from '@/public/img/team/default.jpeg';
 import { changeGoogleDriveURL } from '@/util/helpers';
+import { AgentType } from '@/types/types';
 import { COLORS } from '@/constants/colors';
 import { Mail, Phone } from 'react-feather';
+import defaultIcon from '@/public/img/team/default.jpeg';
 
 export default function AgentCard({
   name,
@@ -11,7 +11,7 @@ export default function AgentCard({
   email,
   phone,
   image,
-}: Agent) {
+}: AgentType) {
   return (
     <div className='h-full overflow-hidden rounded-xl border border-blueGrey2 3xl:rounded-2xl'>
       <div className='bg-white pt-4'>

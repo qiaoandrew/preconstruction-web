@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { Listing } from '@/types/types';
 import Carousel from '../layout/Carousel';
 import ListingCard from '../cards/ListingCard';
+import { ListingType } from '@/types/types';
 
 type ListingsCarouselProps = {
   title: string;
-  listings: Listing[];
+  listings: ListingType[];
   route: string;
 };
 

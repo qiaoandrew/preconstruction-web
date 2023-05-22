@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '@/store/store';
 import { toggleMobileMenu } from '@/store/slices/mobileMenuSlice';
-import { User } from 'react-feather';
 import DesktopMenu from '@/components/navigation/DesktopMenu';
 import remaxLogo from '@/public/img/logos/logo-big.png';
 import Button from '@/components/UI/Button';
 import { COLORS } from '@/constants/colors';
+import { User } from 'react-feather';
 
 export default function Header() {
   const dispatch: AppDispatch = useDispatch();

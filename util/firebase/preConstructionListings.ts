@@ -1,9 +1,9 @@
 import { rdb } from '@/lib/firebase';
 import { ref, get, child } from 'firebase/database';
 import { decode } from '../helpers';
-import { Listing } from '@/types/types';
+import { ListingType } from '@/types/types';
 
-export const getPreConstructionListings = async (): Promise<Listing[]> => {
+export const getPreConstructionListings = async (): Promise<ListingType[]> => {
   const dbRef = ref(rdb);
 
   const snapshot = await get(child(dbRef, 'pre-construction'));
