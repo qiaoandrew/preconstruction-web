@@ -132,3 +132,51 @@ export const validateReportProblem = (values: any): any => {
 
   return errors;
 };
+
+export const validateChangeName = (values: any): any => {
+  const errors: any = {};
+
+  if (!values.newName) {
+    errors.newName = 'Please enter your new name.';
+  }
+
+  return errors;
+};
+
+export function validateChangeEmail(values: any): any {
+  const errors: any = {};
+
+  if (!values.currentPassword) {
+    errors.currentPassword = 'Please enter your current password.';
+  }
+
+  if (!values.newEmail) {
+    errors.newEmail = 'Please enter your email address.';
+  } else if (
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.newEmail)
+  ) {
+    errors.newEmail = 'Please enter a valid email address.';
+  }
+
+  return errors;
+}
+
+export function validateChangePassword(values: any): any {
+  const errors: any = {};
+
+  if (!values.currentPassword) {
+    errors.currentPassword = 'Please enter your current password.';
+  }
+
+  if (!values.newPassword) {
+    errors.newPassword = 'Please enter your new password.';
+  } else if (values.newPassword.length < 6) {
+    errors.newPassword = 'Your password must be at least 6 characters.';
+  }
+
+  if (values.confirmNewPassword !== values.newPassword) {
+    errors.confirmNewPassword = 'Your passwords do not match.';
+  }
+
+  return errors;
+}
