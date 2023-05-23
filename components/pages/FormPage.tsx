@@ -80,7 +80,7 @@ export default function FormPage({
                   {formik.touched[element.name] &&
                     formik.errors[element.name] && (
                       <InputFeedback state='error'>
-                        <p>formik.errors[element.name]</p>
+                        <p>{formik.errors[element.name] as string}</p>
                       </InputFeedback>
                     )}
                 </div>
@@ -99,7 +99,7 @@ export default function FormPage({
                   {formik.touched[element.name] &&
                   formik.errors[element.name] ? (
                     <InputFeedback state='error'>
-                      <p>formik.errors[element.name]</p>
+                      <p>{formik.errors[element.name] as string}</p>
                     </InputFeedback>
                   ) : null}
 
