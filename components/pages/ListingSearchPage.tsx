@@ -8,7 +8,7 @@ import ListingCard from '../cards/ListingCard';
 import ListingsMap from '../map/ListingsMap';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import { ListingGroupType } from '@/types/types';
-import { ArrowLeft, ArrowRight, Map, XCircle } from 'react-feather';
+import { ArrowLeft, ArrowRight, Map, X } from 'react-feather';
 import { COLORS } from '@/constants/colors';
 
 type ListingSearchPageProps = {
@@ -157,12 +157,13 @@ export default function ListingSearchPage({
       </div>
       {showMobileMap && (
         <div className='absolute inset-0 z-50 xl:hidden'>
-          <XCircle
-            color={COLORS.blue1}
-            size={36}
+          <div
             onClick={() => setShowMobileMap(false)}
-            className='absolute right-5 top-5 z-50 cursor-pointer'
-          />
+            className='transition-300 absolute right-5 top-5 z-50 grid h-12 w-12 cursor-pointer place-content-center rounded-md border border-blue1 bg-white hover:bg-grey1'
+          >
+            <X color={COLORS.blue1} size={24} />
+          </div>
+
           <ListingsMap recommendations={recommendations} />
         </div>
       )}
