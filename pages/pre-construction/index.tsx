@@ -5,6 +5,7 @@ import { PRE_CONSTRUCTION_FILTERS } from '@/constants/filters';
 
 export default function PreConstruction() {
   const [filterValues, setFilterValues] = useState<any>({
+    sortBy: '',
     price: [0, 10000000],
     occupancy: new Set(),
     status: new Set(),

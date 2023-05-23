@@ -3,7 +3,7 @@ import { MenuRouteType } from '@/types/types';
 export const NESTED_ROUTES: MenuRouteType[] = [
   {
     type: 'dropdown',
-    text: 'Buy a Home',
+    text: 'Find a Home',
     dropdown: [
       {
         text: 'Pre-Construction',

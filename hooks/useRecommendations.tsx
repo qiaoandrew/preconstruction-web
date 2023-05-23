@@ -20,6 +20,7 @@ export default function useRecommendations(
   const [recommendations, setRecommendations] = useState<
     ListingRecommendationType[]
   >([]);
+
   const preConstructionListings = useSelector(
     (state: RootState) => state.preConstructionListings.preConstructionListings
   );
@@ -123,6 +124,48 @@ function filterPreConstructionListings(
       filteredPreConstructionListings = filteredPreConstructionListings.filter(
         (listing) => filterValues.status.has(listing.status)
       );
+    }
+
+    if (filterValues.sortBy) {
+      if (filterValues.sortBy === 'Price (High to Low)') {
+        filteredPreConstructionListings = filteredPreConstructionListings.sort(
+          (a, b) => Number(b.priceHigh) - Number(a.priceHigh)
+        );
+      } else if (filterValues.sortBy === 'Price (Low to High)') {
+        filteredPreConstructionListings = filteredPreConstructionListings.sort(
+          (a, b) => Number(a.priceLow) - Number(b.priceLow)
+        );
+      } else if (filterValues.sortBy === 'Newest to Oldest') {
+        filteredPreConstructionListings = filteredPreConstructionListings.sort(
+          (a, b) => {
+            if (a.datePosted.includes('Sold')) {
+              return 1;
+            } else if (b.datePosted.includes('Sold')) {
+              return -1;
+            } else {
+              return (
+                new Date(b.datePosted).getTime() -
+                new Date(a.datePosted).getTime()
+              );
+            }
+          }
+        );
+      } else if (filterValues.sortBy === 'Oldest to Newest') {
+        filteredPreConstructionListings = filteredPreConstructionListings.sort(
+          (a, b) => {
+            if (a.datePosted.includes('Sold')) {
+              return -1;
+            } else if (b.datePosted.includes('Sold')) {
+              return 1;
+            } else {
+              return (
+                new Date(a.datePosted).getTime() -
+                new Date(b.datePosted).getTime()
+              );
+            }
+          }
+        );
+      }
     }
   }
 

@@ -2,6 +2,17 @@ import { Filter } from '@/components/UI/Filter';
 
 export const PRE_CONSTRUCTION_FILTERS: Filter[] = [
   {
+    id: 'sortBy',
+    label: 'Sort By',
+    type: 'selectOne',
+    options: [
+      'Price (Low to High)',
+      'Price (High to Low)',
+      'Newest to Oldest',
+      'Oldest to Newest',
+    ],
+  },
+  {
     id: 'price',
     label: 'Price',
     type: 'range',
