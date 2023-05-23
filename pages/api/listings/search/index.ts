@@ -35,22 +35,17 @@ export default async function handler(
       },
     };
 
-    console.log('Min price: ', minPrice);
-    console.log('Min SQFT: ', minSqft);
-
     const url = `https://sandbox.repliers.io/listings?displayAddressOnInternet=Y&displayPublic=Y&hasImages=true&listings=true&operator=AND&sortBy=updatedOnDesc&status=A&fields=listDate,listPrice,mlsNumber,details,map,images,address,images[5]&minBaths=${
       minBaths ? minBaths : '1'
     }&minBeds=${minBeds ? minBeds : '1'}&minParkingSpaces=${
       minParkingSpaces ? minParkingSpaces : '1'
     }&minKitchens=1&pageNum=${pageNum}&type=${type}${
       query ? `&search=${query}` : ''
-    }&resultsPerPage=${resultsPerPage ? resultsPerPage : '30'}${
-      minPrice ? `&minPrice=${minPrice}` : '1'
+    }&resultsPerPage=${resultsPerPage ? resultsPerPage : '12'}${
+      minPrice ? `&minPrice=${minPrice}` : ''
     }${maxPrice ? `&maxPrice=${maxPrice}` : ''}${
-      minSqft ? `&minSqft=${minSqft}` : '1'
+      minSqft ? `&minSqft=${minSqft}` : ''
     }${maxSqft ? `&maxSqft=${maxSqft}` : ''}`;
-
-    console.log(url);
 
     const { data } = await axios.get(url, config);
 

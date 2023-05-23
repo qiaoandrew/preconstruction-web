@@ -97,24 +97,28 @@ function filterPreConstructionListings(
     );
   }
 
-  if (filterValues.price) {
-    filteredPreConstructionListings = filteredPreConstructionListings
-      .filter((listing) => Number(listing.priceLow) >= filterValues.price.at(0))
-      .filter(
-        (listing) => Number(listing.priceHigh) <= filterValues.price.at(1)
+  if (filterValues) {
+    if (filterValues.price) {
+      filteredPreConstructionListings = filteredPreConstructionListings
+        .filter(
+          (listing) => Number(listing.priceLow) >= filterValues.price.at(0)
+        )
+        .filter(
+          (listing) => Number(listing.priceHigh) <= filterValues.price.at(1)
+        );
+    }
+
+    if (filterValues.occupancy.size > 0) {
+      filteredPreConstructionListings = filteredPreConstructionListings.filter(
+        (listing) => filterValues.occupancy.has(listing.occupancy)
       );
-  }
+    }
 
-  if (filterValues.occupancy.size > 0) {
-    filteredPreConstructionListings = filteredPreConstructionListings.filter(
-      (listing) => filterValues.occupancy.has(listing.occupancy)
-    );
-  }
-
-  if (filterValues.status.size > 0) {
-    filteredPreConstructionListings = filteredPreConstructionListings.filter(
-      (listing) => filterValues.status.has(listing.status)
-    );
+    if (filterValues.status.size > 0) {
+      filteredPreConstructionListings = filteredPreConstructionListings.filter(
+        (listing) => filterValues.status.has(listing.status)
+      );
+    }
   }
 
   filteredPreConstructionListings = filteredPreConstructionListings.slice(
@@ -136,28 +140,30 @@ function getAPIUrl(
     type === 'for-sale' ? 'sale' : 'lease'
   }&pageNum=${pageNum}&resultsPerPage=${resultsPerPage}`;
 
-  if (filterValues.price) {
-    url += `&minPrice=${filterValues.price.at(
-      0
-    )}&maxPrice=${filterValues.price.at(1)}`;
-  }
+  if (filterValues) {
+    if (filterValues.price) {
+      url += `&minPrice=${filterValues.price.at(
+        0
+      )}&maxPrice=${filterValues.price.at(1)}`;
+    }
 
-  if (filterValues.bedrooms) {
-    url += `&minBeds=${filterValues.bedrooms.at(0)}`;
-  }
+    if (filterValues.bedrooms) {
+      url += `&minBeds=${filterValues.bedrooms.at(0)}`;
+    }
 
-  if (filterValues.bathrooms) {
-    url += `&minBaths=${filterValues.bathrooms.at(0)}`;
-  }
+    if (filterValues.bathrooms) {
+      url += `&minBaths=${filterValues.bathrooms.at(0)}`;
+    }
 
-  if (filterValues.parking) {
-    url += `&minParkingSpaces=${filterValues.parking.at(0)}`;
-  }
+    if (filterValues.parking) {
+      url += `&minParkingSpaces=${filterValues.parking.at(0)}`;
+    }
 
-  if (filterValues.size) {
-    url += `&minSqft=${filterValues.size.at(0)}&maxSqft=${filterValues.size.at(
-      1
-    )}`;
+    if (filterValues.size) {
+      url += `&minSqft=${filterValues.size.at(
+        0
+      )}&maxSqft=${filterValues.size.at(1)}`;
+    }
   }
 
   return url;
