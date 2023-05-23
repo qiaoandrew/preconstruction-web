@@ -5,11 +5,11 @@ import { FOR_RENT_FILTERS } from '@/constants/filters';
 
 export default function ForRent() {
   const [filterValues, setFilterValues] = useState<any>({
-    price: [0, 10000000],
-    bedrooms: new Set(),
-    bathrooms: new Set(),
-    parking: new Set(),
-    size: [0, 10000],
+    price: [1, 10000000],
+    bedrooms: '',
+    bathrooms: '',
+    parking: '',
+    size: [1, 10000],
   });
 
   return (

@@ -24,19 +24,9 @@ export default function useRecommendations(
   );
 
   const fetchRecommendations = useCallback(
-    async (
-      query: string,
-      type: ListingGroupType,
-      pageNum: number,
-      resultsPerPage: number,
-      filterValues?: any
-    ) => {
+    async (apiUrl: string, type: ListingGroupType) => {
       try {
-        const { data: listings } = await axios.get<ListingType[]>(
-          `/api/listings/search?${query ? `query=${query}&` : ''}type=${
-            type === 'for-sale' ? 'sale' : 'lease'
-          }&pageNum=${pageNum}&resultsPerPage=${resultsPerPage}`
-        );
+        const { data: listings } = await axios.get<ListingType[]>(apiUrl);
 
         setRecommendations(
           listings.map((listing) => ({
@@ -57,60 +47,24 @@ export default function useRecommendations(
 
   useEffect(() => {
     if (type === 'pre-construction') {
-      let queryFilteredListings = preConstructionListings;
-
-      if (query) {
-        queryFilteredListings = queryFilteredListings.filter(
-          (listing) =>
-            listing.title.toLowerCase().startsWith(query.toLowerCase()) ||
-            listing.subtitle.includes(query.toLowerCase())
-        );
-      }
-
-      if (filterValues) {
-        if (filterValues.price.at(0)) {
-          queryFilteredListings = queryFilteredListings.filter(
-            (listing) => Number(listing.priceLow) >= filterValues.price.at(0)
-          );
-        }
-
-        if (filterValues.price.at(1)) {
-          queryFilteredListings = queryFilteredListings.filter(
-            (listing) => Number(listing.priceHigh) <= filterValues.price.at(1)
-          );
-        }
-
-        if (filterValues.occupancy.size > 0) {
-          queryFilteredListings = queryFilteredListings.filter((listing) =>
-            filterValues.occupancy.has(listing.occupancy)
-          );
-        }
-
-        if (filterValues.status.size > 0) {
-          queryFilteredListings = queryFilteredListings.filter((listing) =>
-            filterValues.status.has(listing.status)
-          );
-        }
-      }
-
-      queryFilteredListings = queryFilteredListings.slice(
-        pageNum * resultsPerPage - resultsPerPage,
-        pageNum * resultsPerPage
+      const filteredPreConstructionListings = filterPreConstructionListings(
+        preConstructionListings,
+        query,
+        filterValues,
+        pageNum,
+        resultsPerPage
       );
 
       setRecommendations(
-        queryFilteredListings.map((listing) => ({
+        filteredPreConstructionListings.map((listing) => ({
           listing,
           type: 'pre-construction',
         }))
       );
     } else {
       debouncedGetRecommendations.current(
-        query,
-        type,
-        pageNum,
-        resultsPerPage,
-        filterValues
+        getAPIUrl(query, type, pageNum, resultsPerPage, filterValues),
+        type
       );
     }
   }, [
@@ -124,4 +78,87 @@ export default function useRecommendations(
   ]);
 
   return recommendations;
+}
+
+function filterPreConstructionListings(
+  preConstructionListings: ListingType[],
+  query: string,
+  filterValues: any,
+  pageNum: number,
+  resultsPerPage: number
+) {
+  let filteredPreConstructionListings = preConstructionListings;
+
+  if (query) {
+    filteredPreConstructionListings = filteredPreConstructionListings.filter(
+      (listing) =>
+        listing.title.toLowerCase().startsWith(query.toLowerCase()) ||
+        listing.subtitle.includes(query.toLowerCase())
+    );
+  }
+
+  if (filterValues.price) {
+    filteredPreConstructionListings = filteredPreConstructionListings
+      .filter((listing) => Number(listing.priceLow) >= filterValues.price.at(0))
+      .filter(
+        (listing) => Number(listing.priceHigh) <= filterValues.price.at(1)
+      );
+  }
+
+  if (filterValues.occupancy.size > 0) {
+    filteredPreConstructionListings = filteredPreConstructionListings.filter(
+      (listing) => filterValues.occupancy.has(listing.occupancy)
+    );
+  }
+
+  if (filterValues.status.size > 0) {
+    filteredPreConstructionListings = filteredPreConstructionListings.filter(
+      (listing) => filterValues.status.has(listing.status)
+    );
+  }
+
+  filteredPreConstructionListings = filteredPreConstructionListings.slice(
+    pageNum * resultsPerPage - resultsPerPage,
+    pageNum * resultsPerPage
+  );
+
+  return filteredPreConstructionListings;
+}
+
+function getAPIUrl(
+  query: string,
+  type: ListingGroupType,
+  pageNum: number,
+  resultsPerPage: number,
+  filterValues?: any
+): string {
+  let url = `/api/listings/search?${query ? `query=${query}&` : ''}type=${
+    type === 'for-sale' ? 'sale' : 'lease'
+  }&pageNum=${pageNum}&resultsPerPage=${resultsPerPage}`;
+
+  if (filterValues.price) {
+    url += `&minPrice=${filterValues.price.at(
+      0
+    )}&maxPrice=${filterValues.price.at(1)}`;
+  }
+
+  if (filterValues.bedrooms) {
+    url += `&minBeds=${filterValues.bedrooms.at(0)}`;
+  }
+
+  if (filterValues.bathrooms) {
+    url += `&minBaths=${filterValues.bathrooms.at(0)}`;
+  }
+
+  if (filterValues.parking) {
+    url += `&minParkingSpaces=${filterValues.parking.at(0)}`;
+  }
+
+  if (filterValues.size) {
+    url += `&minSqft=${filterValues.size.at(0)}&maxSqft=${filterValues.size.at(
+      1
+    )}`;
+  }
+
+  return url;
 }

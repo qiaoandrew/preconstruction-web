@@ -99,9 +99,9 @@ function Select({
   setPageNum,
 }: SelectProps) {
   const handleChange = (option: string) => {
-    const newFilterValues = new Set(filterValues[id]);
     if (type === 'many') {
       setPageNum(1);
+      const newFilterValues = new Set(filterValues[id]);
       if (newFilterValues.has(option)) {
         newFilterValues.delete(option);
       } else {
@@ -109,31 +109,35 @@ function Select({
       }
       setFilterValues({ ...filterValues, [id]: newFilterValues });
     } else {
-      if (newFilterValues.has(option)) {
-        setFilterValues({ ...filterValues, [id]: new Set() });
+      setPageNum(1);
+      if (filterValues[id] === option) {
+        setFilterValues({ ...filterValues, [id]: '' });
       } else {
-        setFilterValues({ ...filterValues, [id]: new Set([option]) });
+        setFilterValues({ ...filterValues, [id]: option });
       }
     }
   };
 
   return (
     <div className='flex flex-wrap gap-x-3 gap-y-2.5 xl:gap-x-4'>
-      {options.map((option) => (
-        <div
-          className={`transition-100 cursor-pointer rounded-full border border-blue1 px-3.5 py-1.5 
-          ${
-            filterValues[id].has(option)
-              ? 'bg-blue1 text-white'
-              : 'bg-white text-blue1'
-          }
+      {options.map((option) => {
+        const selected =
+          type === 'many'
+            ? filterValues[id].has(option)
+            : filterValues[id] === option;
+
+        return (
+          <div
+            className={`transition-100 cursor-pointer rounded-full border border-blue1 px-3.5 py-1.5 
+          ${selected ? 'bg-blue1 text-white' : 'bg-white text-blue1'}
           `}
-          onClick={() => handleChange(option)}
-          key={option}
-        >
-          {option}
-        </div>
-      ))}
+            onClick={() => handleChange(option)}
+            key={option}
+          >
+            {option}
+          </div>
+        );
+      })}
     </div>
   );
 }
