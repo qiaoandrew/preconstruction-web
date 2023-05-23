@@ -46,8 +46,6 @@ export default function ListingSearchPage({
     filterValues
   );
 
-  console.log(loading);
-
   const handleChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
     setPageNum(1);

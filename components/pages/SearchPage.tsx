@@ -12,6 +12,7 @@ type SearchPageProps = {
   searchQuery: string;
   handleChangeQuery: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
+  noItemsMessage: string;
 };
 
 export default function SearchPage({
@@ -21,6 +22,7 @@ export default function SearchPage({
   searchQuery,
   handleChangeQuery,
   placeholder,
+  noItemsMessage,
 }: SearchPageProps) {
   return (
     <>
@@ -35,32 +37,38 @@ export default function SearchPage({
             showFilterButton={false}
           />
         </div>
-        <Row3>
-          {itemType === 'listings'
-            ? items.map((recommendation: any) => (
-                <ListingCard
-                  title={recommendation.listing.title}
-                  subtitle={recommendation.listing.subtitle}
-                  priceString={recommendation.listing.priceString}
-                  datePosted={recommendation.listing.datePosted}
-                  image={recommendation.listing.images[0]}
-                  route={`/${recommendation.type}/listings/${recommendation.listing.id}`}
-                  placement='grid'
-                  key={recommendation.listing.id}
-                />
-              ))
-            : items.map((blog: any) => (
-                <BlogCard
-                  placement='grid'
-                  title={blog.title}
-                  description={blog.description}
-                  image={blog.image}
-                  date={blog.date}
-                  route={`/blog/${blog.id}`}
-                  key={blog.id}
-                />
-              ))}
-        </Row3>
+        {items.length > 0 ? (
+          <Row3>
+            {itemType === 'listings'
+              ? items.map((recommendation: any) => (
+                  <ListingCard
+                    title={recommendation.listing.title}
+                    subtitle={recommendation.listing.subtitle}
+                    priceString={recommendation.listing.priceString}
+                    datePosted={recommendation.listing.datePosted}
+                    image={recommendation.listing.images[0]}
+                    route={`/${recommendation.type}/listings/${recommendation.listing.id}`}
+                    placement='grid'
+                    key={recommendation.listing.id}
+                  />
+                ))
+              : items.map((blog: any) => (
+                  <BlogCard
+                    placement='grid'
+                    title={blog.title}
+                    description={blog.description}
+                    image={blog.image}
+                    date={blog.date}
+                    route={`/blog/${blog.id}`}
+                    key={blog.id}
+                  />
+                ))}
+          </Row3>
+        ) : (
+          <p className='text-base font-medium text-blue1 lg:text-lg'>
+            {noItemsMessage}
+          </p>
+        )}
       </div>
     </>
   );

@@ -17,6 +17,7 @@ export default function SavedListings() {
         handleChangeQuery={(e) => setSearchQuery(e.target.value)}
         items={savedListings}
         placeholder='Search saved listings...'
+        noItemsMessage='No saved listings found.'
       />
     </>
   );

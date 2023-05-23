@@ -5,7 +5,7 @@ import { ListingRecommendationType } from '@/types/types';
 import LoadingSpinner from '@/components/UI/LoadingSpinner';
 
 type RecommendationsProps = {
-  loading: true;
+  loading: boolean;
   recommendations: ListingRecommendationType[];
   isRecommendationsVisible: boolean;
   searchBarHeight: number;

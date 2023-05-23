@@ -30,6 +30,7 @@ export default function Blog({ blogs }: BlogsProps) {
             blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             blog.description.toLowerCase().includes(searchQuery.toLowerCase())
         )}
+        noItemsMessage='No blogs found.'
       />
       <Footer />
     </>
