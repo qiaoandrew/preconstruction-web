@@ -2,14 +2,17 @@
 import { Fragment } from 'react';
 import Link from 'next/link';
 import { ListingRecommendationType } from '@/types/types';
+import LoadingSpinner from '@/components/UI/LoadingSpinner';
 
 type RecommendationsProps = {
+  loading: true;
   recommendations: ListingRecommendationType[];
   isRecommendationsVisible: boolean;
   searchBarHeight: number;
 };
 
 export default function HeroRecommendations({
+  loading,
   recommendations,
   isRecommendationsVisible,
   searchBarHeight,
@@ -24,7 +27,9 @@ export default function HeroRecommendations({
       style={{ top: `calc(${searchBarHeight}px + 28px)` }}
     >
       <div className='no-scrollbar transition-300 mx-auto max-h-[300px] max-w-[560px] overflow-y-scroll overscroll-y-contain rounded-xl border border-blueGrey2 bg-white text-left lg:max-w-[720px]'>
-        {recommendations.length > 0 ? (
+        {loading ? (
+          <LoadingSpinner size={24} classes='my-6' />
+        ) : recommendations.length > 0 ? (
           recommendations.map(
             ({ type, listing }: ListingRecommendationType, i: number) => (
               <Fragment key={listing.id}>

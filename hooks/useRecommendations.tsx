@@ -16,6 +16,7 @@ export default function useRecommendations(
   resultsPerPage: number,
   filterValues?: any
 ) {
+  const [loading, setLoading] = useState(false);
   const [recommendations, setRecommendations] = useState<
     ListingRecommendationType[]
   >([]);
@@ -34,6 +35,8 @@ export default function useRecommendations(
             type,
           }))
         );
+
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -47,6 +50,7 @@ export default function useRecommendations(
 
   useEffect(() => {
     if (type === 'pre-construction') {
+      setLoading(true);
       const filteredPreConstructionListings = filterPreConstructionListings(
         preConstructionListings,
         query,
@@ -54,14 +58,15 @@ export default function useRecommendations(
         pageNum,
         resultsPerPage
       );
-
       setRecommendations(
         filteredPreConstructionListings.map((listing) => ({
           listing,
           type: 'pre-construction',
         }))
       );
+      setLoading(false);
     } else {
+      setLoading(true);
       debouncedGetRecommendations.current(
         getAPIUrl(query, type, pageNum, resultsPerPage, filterValues),
         type
@@ -77,7 +82,7 @@ export default function useRecommendations(
     filterValues,
   ]);
 
-  return recommendations;
+  return { loading, recommendations };
 }
 
 function filterPreConstructionListings(

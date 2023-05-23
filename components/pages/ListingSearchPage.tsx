@@ -6,6 +6,7 @@ import SearchBar from '../UI/SearchBar';
 import Filter from '../UI/Filter';
 import ListingCard from '../cards/ListingCard';
 import ListingsMap from '../map/ListingsMap';
+import LoadingSpinner from '../UI/LoadingSpinner';
 import { ListingGroupType } from '@/types/types';
 import { ArrowLeft, ArrowRight, Map, XCircle } from 'react-feather';
 import { COLORS } from '@/constants/colors';
@@ -37,13 +38,15 @@ export default function ListingSearchPage({
 
   const listingsContainerRef = useRef<HTMLDivElement>(null);
 
-  const recommendations = useRecommendations(
+  const { loading, recommendations } = useRecommendations(
     type,
     searchQuery,
     pageNum,
     12,
     filterValues
   );
+
+  console.log(loading);
 
   const handleChangeQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -96,9 +99,11 @@ export default function ListingSearchPage({
               ref={listingsContainerRef}
               className='no-scrollbar flex-grow overflow-y-scroll pb-24 xl:pb-28'
             >
-              <div className='grid gap-8 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-2 4xl:grid-cols-3'>
-                {recommendations.length > 0 ? (
-                  recommendations.map(({ type, listing }) => (
+              {loading ? (
+                <LoadingSpinner />
+              ) : recommendations.length > 0 ? (
+                <div className='grid gap-8 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-2 4xl:grid-cols-3'>
+                  {recommendations.map(({ type, listing }) => (
                     <ListingCard
                       title={listing.title}
                       subtitle={listing.subtitle}
@@ -109,13 +114,13 @@ export default function ListingSearchPage({
                       placement='search'
                       key={listing.id}
                     />
-                  ))
-                ) : (
-                  <p className='text-base font-medium text-blue1 lg:text-lg'>
-                    No listings match your search!
-                  </p>
-                )}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                <p className='text-base font-medium text-blue1 lg:text-lg'>
+                  No listings match your search!
+                </p>
+              )}
             </div>
           </div>
 

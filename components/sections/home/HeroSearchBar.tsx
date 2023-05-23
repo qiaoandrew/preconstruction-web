@@ -21,7 +21,7 @@ export default function HeroSearchBar() {
   const searchBarRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const recommendations = useRecommendations(
+  const { loading, recommendations } = useRecommendations(
     selectedItem.value as ListingGroupType,
     query,
     1,
@@ -96,6 +96,7 @@ export default function HeroSearchBar() {
       </Button>
 
       <HeroRecommendations
+        loading={loading}
         recommendations={recommendations}
         isRecommendationsVisible={isRecommendationsVisible}
         searchBarHeight={searchBarHeight}
