@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import SEO from '@/components/SEO/SEO';
 import SearchPage from '@/components/pages/SearchPage';
 import Footer from '@/components/navigation/Footer';
@@ -37,12 +37,11 @@ export default function Blog({ blogs }: BlogsProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const blogs = await getBlogPreviews();
   return {
     props: {
       blogs,
     },
-    revalidate: 1,
   };
 };
