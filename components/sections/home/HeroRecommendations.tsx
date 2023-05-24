@@ -37,7 +37,7 @@ export default function HeroRecommendations({
                   href={`/${type}/listings/${listing.id}`}
                   className='transition-300 flex items-center justify-between hover:bg-grey1'
                 >
-                  <div className='flex flex-1 items-center justify-between gap-6 p-4'>
+                  <div className='flex flex-1 items-center justify-between gap-6 px-4 py-2 md:py-4'>
                     <div>
                       <p className='text-base mb-1.5 font-display font-bold text-blue1 lg:text-lg'>
                         {listing.title}
@@ -47,7 +47,7 @@ export default function HeroRecommendations({
                       </p>
                     </div>
 
-                    <p className='text-base font-medium text-blue1 lg:text-lg'>
+                    <p className='text-base hidden font-medium text-blue1 md:block'>
                       {listing.priceString}
                     </p>
                   </div>
@@ -57,7 +57,7 @@ export default function HeroRecommendations({
                     alt={listing.title}
                     width={150}
                     height={100}
-                    className='hidden md:block md:h-24 md:w-44 md:object-cover'
+                    className='h-20 w-32 object-cover md:h-24 md:w-44'
                   />
                 </Link>
                 {i !== recommendations.length - 1 && (
