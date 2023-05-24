@@ -212,6 +212,18 @@ function getAPIUrl(
         0
       )}&maxSqft=${filterValues.size.at(1)}`;
     }
+
+    if (filterValues.sortBy) {
+      if (filterValues.sortBy === 'Price (High to Low)') {
+        url += '&sortBy=listPriceDesc';
+      } else if (filterValues.sortBy === 'Price (Low to High)') {
+        url += '&sortBy=listPriceAsc';
+      } else if (filterValues.sortBy === 'Newest to Oldest') {
+        url += '&sortBy=createdOnDesc';
+      } else if (filterValues.sortBy === 'Oldest to Newest') {
+        url += '&sortBy=createdOnAsc';
+      }
+    }
   }
 
   return url;

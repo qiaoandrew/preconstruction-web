@@ -25,6 +25,7 @@ export default async function handler(
       minParkingSpaces,
       minSqft,
       maxSqft,
+      sortBy,
     } = req.query;
 
     const config = {
@@ -35,7 +36,9 @@ export default async function handler(
       },
     };
 
-    const url = `https://sandbox.repliers.io/listings?displayAddressOnInternet=Y&displayPublic=Y&hasImages=true&listings=true&operator=AND&sortBy=updatedOnDesc&status=A&fields=listDate,listPrice,mlsNumber,details,map,images,address,images[5]&minBaths=${
+    const url = `https://sandbox.repliers.io/listings?displayAddressOnInternet=Y&displayPublic=Y&hasImages=true&listings=true&operator=AND&sortBy=${
+      sortBy ? sortBy : 'updatedOnDesc'
+    }&status=A&fields=listDate,listPrice,mlsNumber,details,map,images,address,images[5]&minBaths=${
       minBaths ? minBaths : '1'
     }&minBeds=${minBeds ? minBeds : '1'}&minParkingSpaces=${
       minParkingSpaces ? minParkingSpaces : '1'

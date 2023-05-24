@@ -5,6 +5,7 @@ import { FOR_SALE_FILTERS } from '@/constants/filters';
 
 export default function ForSale() {
   const [filterValues, setFilterValues] = useState<any>({
+    sortBy: '',
     price: [1, 10000000],
     bedrooms: '',
     bathrooms: '',

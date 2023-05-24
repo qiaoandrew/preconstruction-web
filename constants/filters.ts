@@ -59,6 +59,17 @@ export const PRE_CONSTRUCTION_FILTERS: Filter[] = [
 
 export const FOR_SALE_FILTERS: Filter[] = [
   {
+    id: 'sortBy',
+    label: 'Sort By',
+    type: 'selectOne',
+    options: [
+      'Price (Low to High)',
+      'Price (High to Low)',
+      'Newest to Oldest',
+      'Oldest to Newest',
+    ],
+  },
+  {
     id: 'price',
     label: 'Sale Price',
     type: 'range',
@@ -93,6 +104,17 @@ export const FOR_SALE_FILTERS: Filter[] = [
 ];
 
 export const FOR_RENT_FILTERS: Filter[] = [
+  {
+    id: 'sortBy',
+    label: 'Sort By',
+    type: 'selectOne',
+    options: [
+      'Price (Low to High)',
+      'Price (High to Low)',
+      'Newest to Oldest',
+      'Oldest to Newest',
+    ],
+  },
   {
     id: 'price',
     label: 'Sale Price',
