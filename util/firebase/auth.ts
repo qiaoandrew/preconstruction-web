@@ -13,21 +13,33 @@ import {
   updatePassword,
   deleteUser,
 } from 'firebase/auth';
+import { createUserDocument } from './userDocument';
 
 export const logIn = async (email: string, password: string) => {
-  await signInWithEmailAndPassword(auth, email, password);
-  return auth?.currentUser?.uid;
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+  const user = userCredential.user;
+  await createUserDocument(user?.uid as string);
 };
 
 export const logInWithGoogle = async () => {
-  await signInWithPopup(auth, new GoogleAuthProvider());
-  return auth?.currentUser?.uid;
+  const userCredential = await signInWithPopup(auth, new GoogleAuthProvider());
+  const user = userCredential.user;
+  await createUserDocument(user?.uid as string);
 };
 
 export const signUp = async (name: string, email: string, password: string) => {
-  await createUserWithEmailAndPassword(auth, email, password);
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
   await changeDisplayName(name);
-  return auth?.currentUser?.uid;
+  const user = userCredential.user;
+  await createUserDocument(user?.uid as string);
 };
 
 export const logOut = async () => {
