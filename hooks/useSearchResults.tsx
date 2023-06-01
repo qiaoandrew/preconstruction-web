@@ -1,89 +1,134 @@
 import axios from 'axios';
 import { debounce } from 'lodash';
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import {
-  ListingType,
   ListingGroupType,
-  ListingRecommendationType,
+  ListingSearchResultType,
+  ListingType,
 } from '@/types/types';
 
-export default function useRecommendations(
-  type: ListingGroupType,
+export default function useSearchResults(
+  type: ListingGroupType | 'all',
   query: string,
   pageNum: number,
   resultsPerPage: number,
   filterValues?: any
 ) {
-  const [loading, setLoading] = useState(false);
-  const [recommendations, setRecommendations] = useState<
-    ListingRecommendationType[]
-  >([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [searchResults, setSearchResults] = useState<ListingSearchResultType[]>(
+    []
+  );
 
   const preConstructionListings = useSelector(
     (state: RootState) => state.preConstructionListings.preConstructionListings
   );
 
-  const fetchRecommendations = useCallback(
-    async (apiUrl: string, type: ListingGroupType) => {
+  const fetchSearchResults = useCallback(
+    async (
+      type: ListingGroupType | 'all',
+      query: string,
+      pageNum: number,
+      resultsPerPage: number,
+      filterValues: any
+    ) => {
+      setLoading(true);
       try {
-        const { data: listings } = await axios.get<ListingType[]>(apiUrl);
+        if (type === 'pre-construction') {
+          const filteredPreConstructionListings = filterPreConstructionListings(
+            preConstructionListings,
+            query,
+            filterValues,
+            pageNum,
+            resultsPerPage
+          );
+          setSearchResults(
+            filteredPreConstructionListings.map((listing) => ({
+              listing,
+              type: 'pre-construction',
+            }))
+          );
+        } else if (type === 'for-sale' || type === 'for-rent') {
+          const { data: listings } = await axios.get<ListingType[]>(
+            getAPIUrl(query, type, pageNum, resultsPerPage, filterValues)
+          );
 
-        setRecommendations(
-          listings.map((listing) => ({
-            listing,
-            type,
-          }))
-        );
-
-        setLoading(false);
+          setSearchResults(
+            listings.map((listing) => ({
+              listing,
+              type,
+            }))
+          );
+        } else {
+          const filteredPreConstructionListings = filterPreConstructionListings(
+            preConstructionListings,
+            query,
+            filterValues,
+            pageNum,
+            resultsPerPage
+          );
+          const { data: forSaleListings } = await axios.get<ListingType[]>(
+            getAPIUrl(query, 'for-sale', pageNum, resultsPerPage)
+          );
+          const { data: forRentListings } = await axios.get<ListingType[]>(
+            getAPIUrl(query, 'for-rent', pageNum, resultsPerPage)
+          );
+          setSearchResults([
+            ...filteredPreConstructionListings.map((listing) => ({
+              listing,
+              type: 'pre-construction' as ListingGroupType,
+            })),
+            ...forSaleListings.map((listing) => ({
+              listing,
+              type: 'for-sale' as ListingGroupType,
+            })),
+            ...forRentListings.map((listing) => ({
+              listing,
+              type: 'for-rent' as ListingGroupType,
+            })),
+          ]);
+        }
       } catch (error) {
-        console.log(error);
+        console.error(error);
+        setError(true);
       }
+      setLoading(false);
     },
-    []
+    [preConstructionListings]
   );
 
-  const debouncedGetRecommendations = useRef(
-    debounce(fetchRecommendations, 300)
-  );
+  const debouncer: any = useRef();
 
   useEffect(() => {
-    if (type === 'pre-construction') {
-      setLoading(true);
-      const filteredPreConstructionListings = filterPreConstructionListings(
-        preConstructionListings,
-        query,
-        filterValues,
-        pageNum,
-        resultsPerPage
-      );
-      setRecommendations(
-        filteredPreConstructionListings.map((listing) => ({
-          listing,
-          type: 'pre-construction',
-        }))
-      );
-      setLoading(false);
-    } else {
-      setLoading(true);
-      debouncedGetRecommendations.current(
-        getAPIUrl(query, type, pageNum, resultsPerPage, filterValues),
-        type
-      );
-    }
+    debouncer.current = debounce(
+      () =>
+        fetchSearchResults(type, query, pageNum, resultsPerPage, filterValues),
+      300
+    );
+  }, [fetchSearchResults, type, query, pageNum, resultsPerPage, filterValues]);
+
+  const debouncedFetchSearchResults = useCallback(() => {
+    debouncer.current();
+  }, []);
+
+  useEffect(() => {
+    debouncedFetchSearchResults();
+
+    return () => {
+      if (debouncer.current) debouncer.current.cancel();
+    };
   }, [
-    query,
     type,
-    preConstructionListings,
-    debouncedGetRecommendations,
+    query,
     pageNum,
     resultsPerPage,
     filterValues,
+    debouncedFetchSearchResults,
   ]);
 
-  return { loading, recommendations };
+  return { loading, error, searchResults };
 }
 
 function filterPreConstructionListings(

@@ -13,8 +13,8 @@ export default function LoadingSpinner({
   return (
     <div className={`grid place-content-center ${classes}`}>
       <Oval
-        width={60}
-        height={60}
+        width={size}
+        height={size}
         color={COLORS.blue1}
         secondaryColor={COLORS.blueGrey1}
         ariaLabel='oval-loading'

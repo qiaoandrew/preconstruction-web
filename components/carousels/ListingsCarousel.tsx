@@ -14,6 +14,7 @@ export default function ListingsCarousel({
   listings,
   route,
 }: ListingsCarouselProps) {
+  if (!listings) return null;
   return (
     <section className='mb-section'>
       <div className='mx-container-sm mb-5 flex items-center justify-between'>

@@ -7,7 +7,7 @@ import { ChevronDown } from 'react-feather';
 
 export default function DesktopMenu() {
   return (
-    <nav className='hidden items-center gap-10 xl:flex'>
+    <nav className='relative z-50 hidden items-center gap-10 xl:flex'>
       {NESTED_ROUTES.map((route) => {
         if (route.type === 'dropdown') {
           return <MenuDropdown route={route} key={route.text} />;

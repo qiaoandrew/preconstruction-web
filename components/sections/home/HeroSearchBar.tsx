@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import useRecommendations from '@/hooks/useRecommendations';
 import Button from '@/components/UI/Button';
-import HeroRecommendations from './HeroRecommendations';
+import useSearchResults from '@/hooks/useSearchResults';
 import HeroDropdown from './HeroDropdown';
+import HeroRecommendations from './HeroRecommendations';
 import { COLORS } from '@/constants/colors';
 import { ListingGroupType } from '@/types/types';
 import { Search } from 'react-feather';
@@ -21,7 +21,7 @@ export default function HeroSearchBar() {
   const searchBarRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const { loading, recommendations } = useRecommendations(
+  const { loading, searchResults } = useSearchResults(
     selectedItem.value as ListingGroupType,
     query,
     1,
@@ -97,7 +97,7 @@ export default function HeroSearchBar() {
 
       <HeroRecommendations
         loading={loading}
-        recommendations={recommendations}
+        recommendations={searchResults}
         isRecommendationsVisible={isRecommendationsVisible}
         searchBarHeight={searchBarHeight}
       />

@@ -78,3 +78,8 @@ export type ListingRecommendationType = {
   type: ListingGroupType;
   listing: ListingType;
 };
+
+export type ListingSearchResultType = {
+  type: ListingGroupType;
+  listing: ListingType;
+};
