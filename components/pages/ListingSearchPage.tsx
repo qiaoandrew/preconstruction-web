@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import useRecommendations from '@/hooks/useRecommendations';
+import useSearchResults from '@/hooks/useSearchResults';
 import Header from '../navigation/Header';
 import SearchBar from '../UI/SearchBar';
 import Filter from '../UI/Filter';
@@ -38,7 +38,7 @@ export default function ListingSearchPage({
 
   const listingsContainerRef = useRef<HTMLDivElement>(null);
 
-  const { loading, recommendations } = useRecommendations(
+  const { loading, searchResults } = useSearchResults(
     type,
     searchQuery,
     pageNum,
@@ -53,7 +53,7 @@ export default function ListingSearchPage({
 
   const handleIncrementPage = () => {
     listingsContainerRef.current?.scrollTo(0, 0);
-    if (recommendations.length === 12) {
+    if (searchResults.length === 12) {
       setPageNum((prevPageNum) => prevPageNum + 1);
     }
   };
@@ -99,9 +99,9 @@ export default function ListingSearchPage({
             >
               {loading ? (
                 <LoadingSpinner />
-              ) : recommendations.length > 0 ? (
+              ) : searchResults.length > 0 ? (
                 <div className='grid gap-8 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-2 4xl:grid-cols-3'>
-                  {recommendations.map(({ type, listing }) => (
+                  {searchResults.map(({ type, listing }) => (
                     <ListingCard
                       title={listing.title}
                       subtitle={listing.subtitle}
@@ -123,7 +123,7 @@ export default function ListingSearchPage({
           </div>
 
           <div className='hidden overflow-y-hidden xl:block'>
-            <ListingsMap recommendations={recommendations} />
+            <ListingsMap recommendations={searchResults} />
           </div>
         </div>
       </div>
@@ -141,7 +141,7 @@ export default function ListingSearchPage({
           <div
             onClick={handleIncrementPage}
             className={`transition-300 grid h-12 w-12 place-content-center rounded-md border border-blue1 bg-white hover:bg-grey1 ${
-              recommendations.length === 12 ? 'cursor-pointer' : 'opacity-40'
+              searchResults.length === 12 ? 'cursor-pointer' : 'opacity-40'
             }`}
           >
             <ArrowRight size={24} color={COLORS.blue1} />
@@ -164,7 +164,7 @@ export default function ListingSearchPage({
             <X color={COLORS.blue1} size={24} />
           </div>
 
-          <ListingsMap recommendations={recommendations} />
+          <ListingsMap recommendations={searchResults} />
         </div>
       )}
     </>

@@ -8,6 +8,7 @@ type BlogCarouselProps = {
 };
 
 export default function BlogCarousel({ blogs }: BlogCarouselProps) {
+  if (!blogs) return null;
   return (
     <section className='mb-section'>
       <div className='mx-container-sm mb-5 flex items-end justify-between'>

@@ -17,6 +17,10 @@ export const NESTED_ROUTES: MenuRouteType[] = [
         text: 'For Rent',
         link: '/for-rent',
       },
+      {
+        text: 'Compare Lisitngs',
+        link: '/compare-listings',
+      },
     ],
   },
   {
