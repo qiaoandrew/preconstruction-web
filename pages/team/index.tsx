@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import SEO from '@/components/SEO/SEO';
 import Header from '@/components/navigation/Header';
 import Hero from '@/components/sections/team/Hero';
@@ -25,12 +25,11 @@ export default function Team({ team }: TeamProps) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const team = await getTeam();
   return {
     props: {
       team,
     },
-    revalidate: 1,
   };
 };

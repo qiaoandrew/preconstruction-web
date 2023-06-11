@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { getBlogPreviews } from '@/lib/notion';
 import { BlogPreviewType, ListingType } from '@/types/types';
 import SEO from '@/components/SEO/SEO';
@@ -58,7 +58,7 @@ export default function Home({
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   try {
     const blogs = await getBlogPreviews();
     const preConstructionListings = await getPreConstructionListings();
@@ -75,12 +75,10 @@ export const getStaticProps: GetStaticProps = async () => {
         saleListings,
         rentListings,
       },
-      revalidate: 1,
     };
   } catch (error) {
     return {
       props: {},
-      revalidate: 60,
     };
   }
 };
